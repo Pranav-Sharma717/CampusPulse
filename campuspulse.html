@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusPulse — Keep Moving Forward | Capstone Demo</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome 6.5.1 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            },
+            tealAccent: {
+              500: '#0d9488',
+              600: '#0f766e',
+            },
+            amberAccent: {
+              500: '#f59e0b',
+            }
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02)',
+            'glow': '0 0 25px -5px rgba(99, 102, 241, 0.35)',
+            'card': '0 4px 20px -2px rgba(23, 23, 37, 0.06)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Smooth 3D Flip Card Utilities */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- =========================================================================
+       TOP NOTIFICATION BAR / CAPSTONE NOTICE
+       ========================================================================= -->
+  <div class="bg-gradient-to-r from-brand-900 via-indigo-950 to-slate-900 text-white text-xs py-2 px-4 border-b border-indigo-800/40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-brand-500/30 text-brand-200 border border-brand-400/30">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Live Capstone Demo
+        </span>
+        <span class="text-slate-300 hidden sm:inline">Final Year Engineering Project Prototype &bull; Academic Year 2025–2026</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-300">
+        <span class="text-[11px]"><i class="fa-solid fa-clock mr-1 text-brand-400"></i> Context: <strong class="text-white">Sem 5 CSE &bull; Week 9</strong></span>
+        <button onclick="scrollToSection('supervisor-pitch')" class="hover:text-white text-[11px] font-medium text-brand-300 underline underline-offset-2">
+          Supervisor Review Notes &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       STICKY NAVIGATION BAR
+       ========================================================================= -->
+  <nav class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/80 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Brand Logo -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-600 to-tealAccent-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-xl tracking-tight text-slate-900">Campus<span class="text-brand-600">Pulse</span></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">AI</span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium -mt-1 tracking-tight">Keep Moving Forward.</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <div class="hidden lg:flex items-center space-x-1 font-medium text-sm text-slate-600">
+          <a href="#dashboard" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Dashboard</a>
+          <a href="#productivity-coach" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">AI Coach</a>
+          <a href="#academic-assistant" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Academics</a>
+          <a href="#notes-summarizer" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">PDF Studio</a>
+          <a href="#finance-assistant" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Finance</a>
+          <a href="#opportunities" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Opportunities</a>
+          <a href="#marketplace" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Marketplace</a>
+          <a href="#context-engine" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Context AI</a>
+          <a href="#architecture" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">Architecture</a>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex items-center gap-2.5">
+          <button onclick="openFocusTimerModal()" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-brand-700 bg-brand-50 hover:bg-brand-100 border border-brand-200 rounded-xl transition shadow-sm">
+            <i class="fa-solid fa-stopwatch text-brand-600"></i>
+            <span>Focus Mode</span>
+          </button>
+          
+          <a href="#dashboard" class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 rounded-xl shadow-md shadow-brand-500/25 transition-all hover:scale-[1.02]">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>View Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       SECTION 1: LANDING HERO
+       ========================================================================= -->
+  <header id="hero" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-white via-indigo-50/40 to-slate-50 border-b border-slate-200/60">
+    <!-- Soft Background Blur Orbs -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 pointer-events-none opacity-60">
+      <div class="absolute top-0 right-10 w-96 h-96 bg-brand-300/30 rounded-full blur-3xl"></div>
+      <div class="absolute top-20 left-10 w-80 h-80 bg-teal-200/30 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-1/3 w-72 h-72 bg-amber-200/25 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        
+        <!-- Tagline Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-brand-200 shadow-sm text-brand-700 mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+          <span>CampusPulse &bull; <strong>Keep Moving Forward</strong></span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+          Stop Decision Fatigue.<br />
+          <span class="bg-gradient-to-r from-brand-600 via-indigo-600 to-tealAccent-500 bg-clip-text text-transparent">
+            One Intelligent Action at a Time.
+          </span>
+        </h1>
+
+        <!-- One-line pitch -->
+        <p class="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
+          CampusPulse is an AI-powered student assistance platform that reduces decision fatigue by understanding a student’s academic, financial, and personal context, then giving personalized recommendations, intelligent planning, and actionable guidance.
+        </p>
+
+        <!-- CTAs: View Dashboard and See Features -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <a href="#dashboard" class="px-6 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-lg shadow-brand-500/30 hover:shadow-brand-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-table-columns"></i>
+            <span>View Dashboard</span>
+          </a>
+
+          <a href="#features-matrix" class="px-6 py-3.5 text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl shadow-sm hover:-translate-y-0.5 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-slate-500"></i>
+            <span>See Features</span>
+          </a>
+
+          <button onclick="simulateContextAction('exam_rush')" class="px-4 py-3.5 text-xs font-semibold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-xl transition flex items-center gap-1.5">
+            <i class="fa-solid fa-wand-magic-sparkles text-teal-600"></i>
+            <span>Test Context Scenario</span>
+          </button>
+        </div>
+
+        <!-- Quick Proof Micro-badges -->
+        <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-slate-500 text-xs font-medium border-t border-slate-200/80 pt-6">
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-500"></i>
+            <span>Context-Aware Reranking</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-500"></i>
+            <span>Offline LLM Summarizer</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-500"></i>
+            <span>Zero E-Commerce Bias</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-500"></i>
+            <span>Privacy-First Campus Model</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Preview of the Dashboard -->
+      <div class="mt-14 max-w-5xl mx-auto">
+        <div class="p-2 sm:p-3 bg-gradient-to-b from-slate-200/80 via-white to-slate-200/60 rounded-3xl shadow-2xl border border-slate-200/80">
+          <div class="bg-slate-900 rounded-2xl p-4 sm:p-6 text-white shadow-inner relative overflow-hidden">
+            <!-- Mac OS window dots -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span class="text-xs font-mono text-slate-400 ml-3">campuspulse.engine.v2.preview</span>
+              </div>
+              <div class="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                ACTIVE CONTEXT: DBMS EXAM IN 72H
+              </div>
+            </div>
+
+            <!-- Preview Card Grid inside Mac Window -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Urgent Pulse -->
+              <div class="bg-slate-800/80 border border-brand-500/30 rounded-xl p-4 hover:border-brand-500 transition">
+                <div class="flex items-center justify-between text-xs text-brand-300 font-semibold mb-2">
+                  <span><i class="fa-solid fa-bolt mr-1"></i> NEXT BEST ACTION</span>
+                  <span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-300 rounded text-[10px]">25 mins</span>
+                </div>
+                <p class="text-sm font-semibold text-white">Solve Question 2: BCNF vs 3NF Decomposition</p>
+                <p class="text-xs text-slate-400 mt-1">Free 45m window before 2 PM CS302 lab.</p>
+                <div class="mt-3 flex items-center gap-2">
+                  <span class="text-[11px] text-emerald-400"><i class="fa-solid fa-arrow-trend-up"></i> +15 Focus Pts</span>
+                </div>
+              </div>
+
+              <!-- Budget Glance -->
+              <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4">
+                <div class="flex items-center justify-between text-xs text-amber-400 font-semibold mb-2">
+                  <span><i class="fa-solid fa-wallet mr-1"></i> BUDGET PULSE</span>
+                  <span class="text-[11px] text-slate-400">Safe: ₹205/day</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                  <span class="text-xl font-bold text-white">₹820 <span class="text-xs text-slate-400 font-normal">left this week</span></span>
+                  <span class="text-xs text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded">67% spent</span>
+                </div>
+                <div class="w-full bg-slate-700 h-2 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400 h-2 w-[67%]"></div>
+                </div>
+              </div>
+
+              <!-- Matched Opportunity -->
+              <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4">
+                <div class="flex items-center justify-between text-xs text-teal-300 font-semibold mb-2">
+                  <span><i class="fa-solid fa-bullseye mr-1"></i> CAREER MATCH</span>
+                  <span class="px-1.5 py-0.5 bg-teal-500/20 text-teal-300 rounded text-[10px]">96% Match</span>
+                </div>
+                <p class="text-sm font-semibold text-white">Smart India Hackathon 2026</p>
+                <p class="text-xs text-slate-400 mt-1">Theme: AI in Higher Ed &bull; Closes in 4d</p>
+                <div class="mt-3 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-400">Team CSE Alpha</span>
+                  <span class="text-xs text-brand-300 hover:underline cursor-pointer" onclick="scrollToSection('opportunities')">Draft Deck &rarr;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SECTION 2: UNIFIED DASHBOARD
+       ========================================================================= -->
+  <section id="dashboard" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header with Real-time Student Context Bar -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-200">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-house-chimney"></i> Section 02 &bull; Unified Student Dashboard
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Good afternoon, Alex! 👋
+          </h2>
+          <p class="text-sm text-slate-500 mt-1">
+            Wednesday &bull; CS302 Database Management Systems due tomorrow &bull; Current Campus Stress: <span class="text-amber-600 font-semibold">Moderate</span>
+          </p>
+        </div>
+
+        <div class="mt-4 md:mt-0 flex items-center gap-3">
+          <div class="bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm text-xs flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-slate-600">Cognitive Load:</span>
+            <strong class="text-slate-800">Optimal (Window: 2h)</strong>
+          </div>
+          <button onclick="refreshDashboardState()" class="p-2 text-slate-500 hover:text-brand-600 hover:bg-white rounded-lg border border-slate-200 transition" title="Refresh Live State">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Unified 6-Card Dashboard Grid: All 6 Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 1: Today's priority action -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-soft hover:shadow-card transition relative overflow-hidden group">
+          <div class="absolute top-0 left-0 w-1.5 h-full bg-brand-600"></div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2.5 py-1 text-xs font-bold rounded-lg bg-brand-50 text-brand-700 border border-brand-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-fire text-brand-600"></i> Today's Priority Action
+            </span>
+            <span class="text-xs text-rose-500 font-semibold flex items-center gap-1">
+              <i class="fa-regular fa-clock"></i> Due in 18 hrs
+            </span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition">
+            DBMS Assignment 3: BCNF Normalization
+          </h3>
+          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+            Spend the next 25 minutes decomposing relations into 3NF & BCNF to finish Question 2 before lecture.
+          </p>
+          <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="openFocusTimerModal('DBMS Assignment 3 - Question 2')" class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm transition flex items-center gap-1.5">
+              <i class="fa-solid fa-play"></i> Start Focus Session
+            </button>
+            <button onclick="markTaskDoneToast('DBMS Assignment 3')" class="px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition">
+              <i class="fa-regular fa-circle-check mr-1"></i> Mark Done
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Upcoming deadline -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-soft hover:shadow-card transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xs">
+                <i class="fa-regular fa-calendar-check"></i>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">Upcoming Deadlines</h3>
+            </div>
+            <span class="text-[11px] font-semibold text-slate-400">4 Active</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs p-2 rounded-xl bg-slate-50 hover:bg-slate-100/80 transition">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                <div>
+                  <p class="font-semibold text-slate-800">OS Semaphore Lab Report</p>
+                  <p class="text-[10px] text-slate-500">Operating Systems &bull; Weight 10%</p>
+                </div>
+              </div>
+              <span class="font-mono font-medium text-rose-600 text-[11px]">Tomorrow 11:59 PM</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs p-2 rounded-xl bg-slate-50 hover:bg-slate-100/80 transition">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <div>
+                  <p class="font-semibold text-slate-800">DSA Dynamic Programming Quiz</p>
+                  <p class="text-[10px] text-slate-500">Algorithms &bull; 20 MCQs</p>
+                </div>
+              </div>
+              <span class="font-mono font-medium text-amber-600 text-[11px]">In 2 days</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs p-2 rounded-xl bg-slate-50 hover:bg-slate-100/80 transition">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <div>
+                  <p class="font-semibold text-slate-800">ML Model Evaluation Paper</p>
+                  <p class="text-[10px] text-slate-500">Machine Learning Draft</p>
+                </div>
+              </div>
+              <span class="font-mono font-medium text-slate-600 text-[11px]">In 5 days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Budget status -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-soft hover:shadow-card transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">Budget Status</h3>
+            </div>
+            <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full">On Track</span>
+          </div>
+
+          <div class="flex items-baseline justify-between mt-2">
+            <div>
+              <span class="text-2xl font-extrabold text-slate-900">₹820</span>
+              <span class="text-xs text-slate-500 ml-1">remaining of ₹2,500</span>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">₹1,680 spent (67%)</span>
+          </div>
+
+          <!-- Multi-tier progress bar -->
+          <div class="w-full bg-slate-100 h-2.5 rounded-full mt-3 overflow-hidden flex">
+            <div class="bg-emerald-500 h-full w-[45%]" title="Food: ₹1,120"></div>
+            <div class="bg-indigo-500 h-full w-[12%]" title="Printing: ₹290"></div>
+            <div class="bg-amber-400 h-full w-[10%]" title="Transport: ₹180"></div>
+          </div>
+          <div class="flex justify-between text-[10px] text-slate-400 mt-1.5">
+            <span>Food 52%</span>
+            <span>Printing 18%</span>
+            <span>Travel 15%</span>
+            <span>Available 33%</span>
+          </div>
+
+          <p class="text-[11px] text-slate-500 mt-4 bg-slate-50 p-2.5 rounded-xl border border-slate-200/60 flex items-center gap-2">
+            <i class="fa-solid fa-lightbulb text-amber-500"></i>
+            <span>Recommended daily ceiling: <strong class="text-slate-800">₹205/day</strong> for next 4 days.</span>
+          </p>
+        </div>
+
+        <!-- Card 4: Next class/exam -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-soft hover:shadow-card transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-indigo-50 text-brand-600 flex items-center justify-center font-bold text-xs">
+                <i class="fa-solid fa-chalkboard-user"></i>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">Next Class / Exam</h3>
+            </div>
+            <span class="text-xs font-mono text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full font-bold">In 45 Mins</span>
+          </div>
+
+          <div class="p-3 bg-gradient-to-br from-indigo-50/70 to-brand-50/40 rounded-xl border border-indigo-100">
+            <div class="flex items-center justify-between text-xs font-semibold text-brand-700">
+              <span>CS302 &bull; Core Course</span>
+              <span>Lecture + Lab</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm mt-1">Database Management Systems</h4>
+            <div class="flex items-center gap-4 text-xs text-slate-500 mt-2 font-medium">
+              <span><i class="fa-regular fa-clock mr-1 text-slate-400"></i> 02:00 PM – 03:30 PM</span>
+              <span><i class="fa-solid fa-location-dot mr-1 text-slate-400"></i> Hall LH-102</span>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Prof: Dr. S. Ramanujan</span>
+            <button onclick="scrollToSection('notes-summarizer')" class="text-brand-600 font-semibold hover:underline flex items-center gap-1">
+              <span>Open Prep Notes</span> &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 5: Recommended opportunity -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-soft hover:shadow-card transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-xs">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">Recommended Opportunity</h3>
+            </div>
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+              96% AI Match
+            </span>
+          </div>
+
+          <h4 class="font-bold text-slate-900 text-sm">Google Summer of Code 2026</h4>
+          <p class="text-xs text-slate-500 mt-1">Open Source Contributor &bull; PostgreSQL Foundation Org</p>
+          
+          <div class="flex flex-wrap gap-1.5 mt-3">
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-medium">SQL</span>
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-medium">C/C++</span>
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-medium">Query Optimization</span>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500 font-medium"><i class="fa-regular fa-clock mr-1"></i> Ends Mar 28</span>
+            <a href="#opportunities" class="text-teal-700 font-semibold hover:underline">
+              View Application &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 6: Daily productivity score -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xs">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">Daily Productivity Score</h3>
+            </div>
+            <span class="text-xs text-brand-600 font-semibold">+14 pts today</span>
+          </div>
+
+          <div class="flex items-center gap-5 my-2">
+            <!-- Circular Gauge -->
+            <div class="relative w-20 h-20 flex-shrink-0">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                <path class="text-slate-100" stroke-width="3.5" stroke="currentColor" fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="productivity-circle" class="text-brand-600" stroke-width="3.5" stroke-dasharray="84, 100" stroke-linecap="round" stroke="currentColor" fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="productivity-score-text" class="text-xl font-extrabold text-slate-900">84</span>
+                <span class="text-[9px] text-slate-400 font-bold uppercase">/ 100</span>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-xs font-semibold text-slate-800">State: High Momentum 🚀</p>
+              <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">
+                2 focused study blocks completed. 1 assignment submitted on time.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-[11px] bg-slate-50 p-2 rounded-xl text-slate-600 flex items-center justify-between">
+            <span>Target today: 90 pts</span>
+            <span class="font-semibold text-brand-600">6 pts to goal</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 3: AI PRODUCTIVITY COACH
+       ========================================================================= -->
+  <section id="productivity-coach" class="py-16 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+          <i class="fa-solid fa-brain"></i> Section 03 &bull; AI Productivity Coach
+        </div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Eliminating Choice Overload With One Single Action
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Students don't need 40 to-do items. CampusPulse analyzes calendar gaps, cognitive fatigue, and impending due dates to propose <strong>exactly one meaningful next action</strong>.
+        </p>
+      </div>
+
+      <!-- Coach Action Card -->
+      <div class="max-w-4xl mx-auto">
+        <div id="ai-coach-main-card" class="bg-gradient-to-br from-brand-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden border border-brand-700/50">
+          
+          <!-- Background Ambient Flare -->
+          <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-xs uppercase tracking-widest font-mono text-brand-300 font-bold">
+                RECOMMENDED NEXT BEST ACTION
+              </span>
+            </div>
+            <div class="text-xs bg-white/10 px-3 py-1 rounded-full border border-white/15 text-slate-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-bolt text-amber-400"></i>
+              <span>Context Weight: <strong>0.94 / 1.0</strong></span>
+            </div>
+          </div>
+
+          <!-- Coach Core Message -->
+          <div class="space-y-3">
+            <div class="text-xs text-brand-300 font-semibold uppercase tracking-wider flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-brand-500/30 border border-brand-400/30">Course: CS302 (DBMS)</span>
+              <span>&bull; Due Tomorrow, 09:00 AM</span>
+            </div>
+            <h3 id="coach-task-headline" class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              “Your DBMS assignment is due tomorrow. Spend the next 25 minutes completing Question 2.”
+            </h3>
+            <p id="coach-task-rationale" class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              <strong>Why right now:</strong> You have an uninterrupted 45-minute window before your 2:00 PM lab. Solving Question 2 (3NF and BCNF normalization) now removes 60% of tonight's cognitive load.
+            </p>
+          </div>
+
+          <!-- Micro Metas -->
+          <div class="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-300 font-medium">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-stopwatch text-brand-400"></i> Est. Time: <strong>25 mins</strong></span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-chart-simple text-emerald-400"></i> Stress Relief: <strong>High</strong></span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-trophy text-amber-400"></i> Potential Reward: <strong>+15 Productivity Points</strong></span>
+          </div>
+
+          <!-- Action Buttons: Start Focus Session, Reschedule, Mark Done -->
+          <div class="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center gap-3">
+            <button onclick="openFocusTimerModal('DBMS Assignment: Question 2')" class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold text-sm shadow-lg shadow-brand-500/40 hover:scale-[1.02] transition flex items-center gap-2">
+              <i class="fa-solid fa-play"></i>
+              <span>Start Focus Session</span>
+            </button>
+
+            <button onclick="openRescheduleModal()" class="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/20 transition flex items-center gap-2">
+              <i class="fa-regular fa-clock"></i>
+              <span>Reschedule</span>
+            </button>
+
+            <button onclick="completeCurrentCoachAction()" class="px-4 py-3 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-200 font-medium text-sm border border-emerald-500/30 transition flex items-center gap-2">
+              <i class="fa-solid fa-check"></i>
+              <span>Mark Done</span>
+            </button>
+
+            <button onclick="explainCoachAlgorithm()" class="ml-auto text-xs text-brand-300 hover:text-white underline underline-offset-4 flex items-center gap-1">
+              <i class="fa-solid fa-circle-info"></i> How did AI pick this?
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Coach Explanation Sub-panel (hidden by default, togglable) -->
+        <div id="coach-algo-explanation" class="hidden mt-4 p-5 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-700">
+          <div class="font-bold text-slate-900 mb-1 flex items-center justify-between">
+            <span><i class="fa-solid fa-code-branch text-brand-600 mr-1.5"></i> Multi-Factor Heuristic Calculation:</span>
+            <button onclick="explainCoachAlgorithm()" class="text-slate-400 hover:text-slate-600">&times;</button>
+          </div>
+          <p class="leading-relaxed">
+            <code>Score(Task) = w1 * (1 / DueHrs) + w2 * SlotMatch(45m) + w3 * (FatigueDiscount) + w4 * AcademicWeight</code>.<br />
+            With <strong>DBMS assignment due in 18 hrs</strong> and a <strong>45m free schedule gap</strong> right now, its rank score hit <strong>0.94</strong>, superseding OS Lab Report (due in 36 hrs) and Hackathon form (due in 96 hrs).
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: SMART ACADEMIC ASSISTANT
+       ========================================================================= -->
+  <section id="academic-assistant" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-book-open"></i> Section 04 &bull; Smart Academic Assistant
+          </div>
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Integrated Academic Engine
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Study plan generator, assignment tracker, notes summarizer, flashcard generator, quiz generator, and adaptive study schedule across DBMS, DSA, Operating Systems, and Machine Learning.
+          </p>
+        </div>
+
+        <!-- Tab Controls -->
+        <div class="mt-4 md:mt-0 flex flex-wrap gap-2 bg-slate-200/70 p-1.5 rounded-xl border border-slate-300/60 text-xs font-semibold">
+          <button onclick="switchAcademicTab('assignments')" id="tab-btn-assignments" class="px-3.5 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition font-bold">
+            Assignment Tracker
+          </button>
+          <button onclick="switchAcademicTab('studyplan')" id="tab-btn-studyplan" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition font-semibold">
+            Study Plan Generator
+          </button>
+          <button onclick="switchAcademicTab('schedule')" id="tab-btn-schedule" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition font-semibold">
+            Adaptive Schedule
+          </button>
+        </div>
+      </div>
+
+      <!-- Academic Tab 1: Assignment Tracker -->
+      <div id="academic-tab-assignments" class="block">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-soft overflow-hidden">
+          <div class="p-4 bg-slate-50/70 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-slate-700">Course Filter:</span>
+              <button onclick="filterAssignmentSubject('all')" class="px-2.5 py-1 rounded-md bg-brand-600 text-white font-medium">All</button>
+              <button onclick="filterAssignmentSubject('DBMS')" class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 font-medium">DBMS</button>
+              <button onclick="filterAssignmentSubject('DSA')" class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 font-medium">DSA</button>
+              <button onclick="filterAssignmentSubject('OS')" class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 font-medium">OS</button>
+              <button onclick="filterAssignmentSubject('ML')" class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 font-medium">Machine Learning</button>
+            </div>
+            <div class="text-slate-500">
+              Showing 4 active assignments &bull; 1 completed
+            </div>
+          </div>
+
+          <div class="divide-y divide-slate-100 overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-700 min-w-[650px]">
+              <thead class="bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">Subject</th>
+                  <th class="py-3 px-4">Assignment / Deliverable</th>
+                  <th class="py-3 px-4">Deadline</th>
+                  <th class="py-3 px-4">Progress</th>
+                  <th class="py-3 px-4">Urgency</th>
+                  <th class="py-3 px-4 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <!-- Item 1: DBMS -->
+                <tr class="hover:bg-slate-50/70 transition assignment-row" data-subject="DBMS">
+                  <td class="py-3.5 px-4 font-semibold text-brand-700">
+                    <span class="px-2 py-0.5 rounded bg-brand-50 border border-brand-200">CS302 DBMS</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="font-bold text-slate-900">Assignment 3: Normalization & Functional Dependencies</div>
+                    <div class="text-slate-400 text-[11px]">Decomposing R into BCNF; dependency preserving tests</div>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono text-rose-600 font-semibold">Tomorrow, 09:00 AM</td>
+                  <td class="py-3.5 px-4">
+                    <div class="w-28 bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-brand-600 h-full w-[65%]"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-0.5">65% (Q1 Done)</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-rose-100 text-rose-700">Critical</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button onclick="openFocusTimerModal('DBMS Assignment 3 - Q2')" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-medium text-xs">
+                      Work On It
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Item 2: OS -->
+                <tr class="hover:bg-slate-50/70 transition assignment-row" data-subject="OS">
+                  <td class="py-3.5 px-4 font-semibold text-indigo-700">
+                    <span class="px-2 py-0.5 rounded bg-indigo-50 border border-indigo-200">CS304 OS</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="font-bold text-slate-900">Lab Project: Producer-Consumer using Semaphores</div>
+                    <div class="text-slate-400 text-[11px]">POSIX threads, mutex locking & buffer bounds</div>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono text-amber-600 font-semibold">In 36 Hours</td>
+                  <td class="py-3.5 px-4">
+                    <div class="w-28 bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-indigo-600 h-full w-[30%]"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-0.5">30% (Code written)</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-100 text-amber-800">Medium</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button onclick="openFocusTimerModal('OS Semaphore Lab Report')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs">
+                      Resume
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Item 3: DSA -->
+                <tr class="hover:bg-slate-50/70 transition assignment-row" data-subject="DSA">
+                  <td class="py-3.5 px-4 font-semibold text-teal-700">
+                    <span class="px-2 py-0.5 rounded bg-teal-50 border border-teal-200">CS201 DSA</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="font-bold text-slate-900">DP Problem Set: 0/1 Knapsack & Matrix Chain</div>
+                    <div class="text-slate-400 text-[11px]">Bottom-up memoization vs tabulation</div>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono text-slate-600 font-medium">In 4 Days</td>
+                  <td class="py-3.5 px-4">
+                    <div class="w-28 bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-teal-500 h-full w-[80%]"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-0.5">80% (4/5 Solved)</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800">Low</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button onclick="markTaskDoneToast('DSA DP Problem Set')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs">
+                      Submit
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Item 4: Machine Learning -->
+                <tr class="hover:bg-slate-50/70 transition assignment-row" data-subject="ML">
+                  <td class="py-3.5 px-4 font-semibold text-purple-700">
+                    <span class="px-2 py-0.5 rounded bg-purple-50 border border-purple-200">CS401 ML</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="font-bold text-slate-900">Kaggle Feature Engineering & Random Forest Tuning</div>
+                    <div class="text-slate-400 text-[11px]">Hyperparameter grid search & cross-validation</div>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono text-slate-600 font-medium">In 6 Days</td>
+                  <td class="py-3.5 px-4">
+                    <div class="w-28 bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <div class="bg-purple-600 h-full w-[15%]"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-0.5">15% (Data cleaned)</span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-slate-100 text-slate-700">Upcoming</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button onclick="openFocusTimerModal('ML Feature Engineering')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs">
+                      Queue
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Academic Tab 2: Study Plan Generator (Interactive) -->
+      <div id="academic-tab-studyplan" class="hidden">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-soft">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Inputs -->
+            <div class="space-y-4">
+              <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-brand-600"></i> Generator Parameters
+              </h3>
+              <p class="text-xs text-slate-500">
+                Provide your target exam date and daily available hours. The AI calculates spaced repetition slots based on syllabus weightage.
+              </p>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Target Subject</label>
+                <select id="gen-subject" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-medium focus:ring-2 focus:ring-brand-500 outline-none">
+                  <option value="DBMS">CS302: Database Management Systems (Midterm)</option>
+                  <option value="DSA">CS201: Data Structures & Algorithms</option>
+                  <option value="OS">CS304: Operating Systems</option>
+                  <option value="ML">CS401: Machine Learning Foundations</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Days Until Exam</label>
+                <input type="range" id="gen-days" min="2" max="14" value="4" class="w-full accent-brand-600" oninput="document.getElementById('gen-days-val').innerText = this.value + ' Days'" />
+                <div class="flex justify-between text-[11px] text-slate-400 font-mono mt-1">
+                  <span>2 Days (Sprint)</span>
+                  <span id="gen-days-val" class="text-brand-600 font-bold">4 Days</span>
+                  <span>14 Days (Relaxed)</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Daily Focused Study Cap</label>
+                <select id="gen-hours" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-medium">
+                  <option value="2">2.0 Hours / Day (Balanced with lectures)</option>
+                  <option value="3" selected>3.0 Hours / Day (Recommended)</option>
+                  <option value="5">5.0 Hours / Day (Exam Crunch)</option>
+                </select>
+              </div>
+
+              <button onclick="generateCustomStudyPlan()" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>Generate Adaptive Study Schedule</span>
+              </button>
+            </div>
+
+            <!-- Output Preview -->
+            <div class="lg:col-span-2 bg-slate-50 rounded-2xl p-5 border border-slate-200/80 flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-calendar-days text-brand-600"></i>
+                  <span id="plan-preview-title">AI Spaced-Repetition Plan for CS302 DBMS (4-Day Horizon)</span>
+                </span>
+                <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">High Confidence</span>
+              </div>
+
+              <div id="study-plan-output" class="mt-4 space-y-3 flex-1 overflow-y-auto max-h-80 pr-1 text-xs">
+                <!-- Day 1 -->
+                <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+                  <div>
+                    <div class="font-bold text-brand-700">Day 1 &bull; High-Yield Core (45m + 45m)</div>
+                    <p class="font-semibold text-slate-900 mt-0.5">Relational Algebra & Normalization (1NF through BCNF)</p>
+                    <p class="text-slate-500 text-[11px] mt-1">Focus: Candidate key finding algorithm and Lossless join checks.</p>
+                  </div>
+                  <span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-[10px] font-bold">Weight: 35%</span>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+                  <div>
+                    <div class="font-bold text-brand-700">Day 2 &bull; Transaction & Concurrency (60m)</div>
+                    <p class="font-semibold text-slate-900 mt-0.5">ACID Properties, Two-Phase Locking (2PL), Deadlock Detection</p>
+                    <p class="text-slate-500 text-[11px] mt-1">Focus: Conflict serializability graphs and recovery log protocols.</p>
+                  </div>
+                  <span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-[10px] font-bold">Weight: 25%</span>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+                  <div>
+                    <div class="font-bold text-brand-700">Day 3 &bull; Indexing & Storage (45m)</div>
+                    <p class="font-semibold text-slate-900 mt-0.5">B+ Tree Insertion/Deletion & Hash Index Tradeoffs</p>
+                    <p class="text-slate-500 text-[11px] mt-1">Focus: Tree height calculations and block I/O cost estimations.</p>
+                  </div>
+                  <span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-[10px] font-bold">Weight: 20%</span>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+                  <div>
+                    <div class="font-bold text-emerald-700">Day 4 &bull; Active Recall Mock Exam (60m)</div>
+                    <p class="font-semibold text-slate-900 mt-0.5">Previous Year Question Paper Sprint + Weak Spot Flashcards</p>
+                    <p class="text-slate-500 text-[11px] mt-1">Focus: Time management and query syntax drills.</p>
+                  </div>
+                  <span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold">Review</span>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs">
+                <span class="text-slate-500">Total Study Commitment: <strong>7.5 Hours</strong></span>
+                <button onclick="syncScheduleToast()" class="text-brand-600 font-bold hover:underline">
+                  <i class="fa-solid fa-calendar-plus mr-1"></i> Sync to Google Calendar / LMS
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Academic Tab 3: Adaptive Study Schedule -->
+      <div id="academic-tab-schedule" class="hidden">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Weekly Dynamic Load Distribution</h3>
+              <p class="text-xs text-slate-500">Autonomous calendar shifting based on exam proximity</p>
+            </div>
+            <div class="flex items-center gap-3 text-xs">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-brand-500"></span> DBMS</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-teal-500"></span> DSA</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-indigo-500"></span> OS</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-purple-500"></span> ML</span>
+            </div>
+          </div>
+
+          <!-- Weekly Matrix -->
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 text-xs">
+            <!-- Mon -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+              <div class="font-bold text-slate-800 pb-2 border-b border-slate-200 flex justify-between">
+                <span>Monday</span>
+                <span class="text-slate-400 font-normal">Passed</span>
+              </div>
+              <div class="mt-2.5 space-y-2">
+                <div class="p-2 bg-teal-100 text-teal-800 rounded-lg text-[11px] font-medium">DSA: Graph BFS/DFS (Done)</div>
+                <div class="p-2 bg-indigo-100 text-indigo-800 rounded-lg text-[11px] font-medium">OS: Process Lifecycle (Done)</div>
+              </div>
+            </div>
+
+            <!-- Tue -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+              <div class="font-bold text-slate-800 pb-2 border-b border-slate-200 flex justify-between">
+                <span>Tuesday</span>
+                <span class="text-slate-400 font-normal">Passed</span>
+              </div>
+              <div class="mt-2.5 space-y-2">
+                <div class="p-2 bg-brand-100 text-brand-800 rounded-lg text-[11px] font-medium">DBMS: ER Modeling (Done)</div>
+                <div class="p-2 bg-purple-100 text-purple-800 rounded-lg text-[11px] font-medium">ML: Linear Reg Lab (Done)</div>
+              </div>
+            </div>
+
+            <!-- Wed (Today) -->
+            <div class="p-3 bg-brand-50/60 rounded-xl border-2 border-brand-300 shadow-sm relative">
+              <div class="font-bold text-brand-900 pb-2 border-b border-brand-200 flex justify-between">
+                <span>Wed (Today)</span>
+                <span class="text-brand-600 font-bold">Active</span>
+              </div>
+              <div class="mt-2.5 space-y-2">
+                <div class="p-2 bg-brand-600 text-white rounded-lg text-[11px] font-semibold flex items-center justify-between">
+                  <span>DBMS: Q2 Normalization</span>
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div class="p-2 bg-indigo-100 text-indigo-800 rounded-lg text-[11px] font-medium">OS: Semaphore Draft</div>
+              </div>
+            </div>
+
+            <!-- Thu -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+              <div class="font-bold text-slate-800 pb-2 border-b border-slate-200 flex justify-between">
+                <span>Thursday</span>
+                <span class="text-slate-400 font-normal">Upcoming</span>
+              </div>
+              <div class="mt-2.5 space-y-2">
+                <div class="p-2 bg-brand-100 text-brand-800 rounded-lg text-[11px] font-medium">DBMS: Final Revision</div>
+                <div class="p-2 bg-teal-100 text-teal-800 rounded-lg text-[11px] font-medium">DSA: DP Quiz Prep</div>
+              </div>
+            </div>
+
+            <!-- Fri -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+              <div class="font-bold text-slate-800 pb-2 border-b border-slate-200 flex justify-between">
+                <span>Friday</span>
+                <span class="text-slate-400 font-normal">Upcoming</span>
+              </div>
+              <div class="mt-2.5 space-y-2">
+                <div class="p-2 bg-rose-100 text-rose-800 rounded-lg text-[11px] font-bold">DBMS MIDTERM EXAM 📝</div>
+                <div class="p-2 bg-purple-100 text-purple-800 rounded-lg text-[11px] font-medium">ML: Project Sprint</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 5: NOTES & PDF SUMMARIZATION DEMO
+       ========================================================================= -->
+  <section id="notes-summarizer" class="py-16 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200 mb-3">
+          <i class="fa-solid fa-file-pdf"></i> Section 05 &bull; Notes &amp; PDF Summarization Demo
+        </div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Transform 40-Page Lecture Slides into 5-Minute Mastery
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Upload course notes, lecture PDFs, or professor slide decks. CampusPulse generates structured summaries, high-yield bullet points, predicted exam questions, interactive flashcards, and diagnostic quizzes.
+        </p>
+      </div>
+
+      <!-- Upload Zone & Preloaded PDF Switcher -->
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Mock Upload Box -->
+        <div id="pdf-drop-zone" class="border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50/80 rounded-2xl p-6 sm:p-8 text-center transition cursor-pointer group">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base mt-3">
+            Drag and drop course lecture notes or PDFs here
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">
+            Supports .PDF, .PPTX, .DOCX, or Markdown notes (Max 50MB)
+          </p>
+
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+            <span class="text-xs text-slate-400 font-medium">Or test with preloaded course notes:</span>
+            <button onclick="loadSamplePDF('dbms')" class="px-3 py-1.5 rounded-lg bg-brand-100 hover:bg-brand-200 text-brand-800 font-semibold text-xs transition flex items-center gap-1.5">
+              <i class="fa-solid fa-file-pdf text-brand-600"></i>
+              <span>Load DBMS_Unit4_Normalization.pdf</span>
+            </button>
+            <button onclick="loadSamplePDF('dsa')" class="px-3 py-1.5 rounded-lg bg-teal-100 hover:bg-teal-200 text-teal-800 font-semibold text-xs transition flex items-center gap-1.5">
+              <i class="fa-solid fa-file-code text-teal-600"></i>
+              <span>Load DSA_Dynamic_Programming.pdf</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Simulated Processing Spinner (hidden initially) -->
+        <div id="pdf-processing-state" class="hidden my-8 p-6 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+          <div class="inline-block w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
+          <p id="processing-step-label" class="font-semibold text-slate-800 text-sm mt-3">
+            Parsing PDF AST & Extracting High-Yield Concepts...
+          </p>
+          <div class="w-64 mx-auto bg-slate-200 h-1.5 rounded-full mt-3 overflow-hidden">
+            <div id="processing-progress-bar" class="bg-brand-600 h-full w-[35%] transition-all duration-300"></div>
+          </div>
+        </div>
+
+        <!-- Generated Output Section (Revealed after upload/click) -->
+        <div id="pdf-result-container" class="mt-8 bg-white rounded-2xl border border-slate-200 shadow-soft overflow-hidden">
+          
+          <!-- File Banner Header -->
+          <div class="p-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-brand-500/30 border border-brand-400/40 text-brand-300 flex items-center justify-center font-bold text-sm">
+                <i class="fa-solid fa-file-pdf"></i>
+              </div>
+              <div>
+                <h4 id="pdf-doc-title" class="font-bold text-sm text-white">DBMS_Unit4_Normalization_Comprehensive.pdf</h4>
+                <p id="pdf-doc-meta" class="text-[11px] text-slate-400">38 Pages &bull; Extracted in 1.2s &bull; RAG Confidence: 99.1%</p>
+              </div>
+            </div>
+
+            <!-- Inner Tabs: Summary, Key points, Important questions, Flashcards, Quiz -->
+            <div class="flex items-center gap-1.5 bg-slate-800 p-1 rounded-xl text-xs">
+              <button onclick="switchDocTab('summary')" id="doc-tab-summary" class="px-3 py-1 rounded-lg bg-brand-600 text-white font-semibold">Summary</button>
+              <button onclick="switchDocTab('keypoints')" id="doc-tab-keypoints" class="px-3 py-1 rounded-lg text-slate-300 hover:text-white">Key Points</button>
+              <button onclick="switchDocTab('questions')" id="doc-tab-questions" class="px-3 py-1 rounded-lg text-slate-300 hover:text-white">Important Questions</button>
+              <button onclick="switchDocTab('flashcards')" id="doc-tab-flashcards" class="px-3 py-1 rounded-lg text-slate-300 hover:text-white">Flashcards (3)</button>
+              <button onclick="switchDocTab('quiz')" id="doc-tab-quiz" class="px-3 py-1 rounded-lg text-slate-300 hover:text-white">Quiz Questions</button>
+            </div>
+          </div>
+
+          <!-- Doc Tab 1: Executive Summary -->
+          <div id="doc-content-summary" class="p-6 sm:p-8 space-y-4 text-slate-700 text-sm leading-relaxed">
+            <div class="flex items-center gap-2 text-xs font-bold text-brand-600 uppercase tracking-wider">
+              <i class="fa-solid fa-sparkles"></i> AI Executive Synthesis
+            </div>
+            <p id="doc-summary-p1">
+              Database normalization is the systematic process of organizing fields and tables within a relational database to minimize redundancy and eliminate anomalies (insertion, update, and deletion anomalies). The syllabus unit focuses on functional dependencies (FDs), canonical cover computations, and progressive normal forms from 1NF to Boyce-Codd Normal Form (BCNF).
+            </p>
+            <p id="doc-summary-p2">
+              A critical exam distinction highlighted in these slides: <strong>3NF preserves functional dependencies and is always lossless</strong>, whereas <strong>BCNF guarantees complete elimination of redundancy based on functional dependencies</strong>, but may not always preserve all original FDs upon decomposition.
+            </p>
+            <div class="bg-brand-50/70 p-4 rounded-xl border border-brand-200/80 text-xs text-brand-900 font-medium">
+              💡 <strong>High-Probability Exam Alert:</strong> Professor emphasized Question 2 on the Midterm will test whether a candidate relation R(A, B, C, D) with F = {A &rarr; B, B &rarr; C, C &rarr; D} can be decomposed into BCNF without losing dependencies.
+            </div>
+          </div>
+
+          <!-- Doc Tab 2: Key Points -->
+          <div id="doc-content-keypoints" class="hidden p-6 sm:p-8 space-y-3">
+            <h4 class="font-bold text-slate-900 text-sm mb-3">Core Theorems & High-Yield Key Points:</h4>
+            <ul id="doc-keypoints-list" class="space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-1.5 flex-shrink-0"></span>
+                <span><strong>Armstrong's Axioms:</strong> Reflexivity (Y &sube; X &rArr; X &rarr; Y), Augmentation (X &rarr; Y &rArr; XZ &rarr; YZ), and Transitivity (X &rarr; Y, Y &rarr; Z &rArr; X &rarr; Z).</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-1.5 flex-shrink-0"></span>
+                <span><strong>Lossless-Join Decomposition Condition:</strong> A decomposition of R into R1 and R2 is lossless if and only if (R1 &cap; R2) &rarr; R1 OR (R1 &cap; R2) &rarr; R2.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-1.5 flex-shrink-0"></span>
+                <span><strong>BCNF Criterion:</strong> For every non-trivial functional dependency X &rarr; Y, the left side X MUST be a superkey for the relation.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-1.5 flex-shrink-0"></span>
+                <span><strong>3NF Criterion:</strong> For every non-trivial X &rarr; Y, either X is a superkey OR Y is a prime attribute (part of some candidate key).</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Doc Tab 3: Important Exam Questions -->
+          <div id="doc-content-questions" class="hidden p-6 sm:p-8 space-y-4">
+            <h4 class="font-bold text-slate-900 text-sm">Predicted 5-Mark & 10-Mark University Questions:</h4>
+            <div id="doc-questions-list" class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="font-bold text-slate-800">Q1 (10 Marks): Compare 3NF and BCNF with a suitable real-world schema.</div>
+                <p class="text-slate-500 mt-1">Expected answer key: Define both forms; demonstrate a relation where 3NF is achieved but BCNF fails without sacrificing dependency preservation.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="font-bold text-slate-800">Q2 (5 Marks): Prove that any relation with two attributes is always in BCNF.</div>
+                <p class="text-slate-500 mt-1">Expected answer key: Analyze non-trivial FDs possible for R(A, B). In all non-trivial cases, the LHS forms a candidate key.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doc Tab 4: Generated Flashcards (Interactive Flip!) -->
+          <div id="doc-content-flashcards" class="hidden p-6 sm:p-8">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-bold text-slate-900 text-sm">Active Recall Flashcards (Click Card to Flip)</h4>
+              <span class="text-xs text-slate-400">Card 1 of 3</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Card 1 -->
+              <div class="perspective-1000 h-48 cursor-pointer" onclick="this.firstElementChild.classList.toggle('rotate-y-180')">
+                <div class="w-full h-full duration-500 transform-style-3d relative transition-transform">
+                  <!-- Front -->
+                  <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-brand-50 to-white rounded-2xl border-2 border-brand-200 p-5 flex flex-col justify-between backface-hidden shadow-sm">
+                    <span class="text-[10px] uppercase font-bold text-brand-600 tracking-wider">Concept Drill</span>
+                    <p class="font-bold text-slate-800 text-sm text-center">What is the exact requirement for a relation to be in BCNF?</p>
+                    <span class="text-[10px] text-slate-400 text-center">Tap to flip &rarr;</span>
+                  </div>
+                  <!-- Back -->
+                  <div class="absolute inset-0 w-full h-full bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-between backface-hidden rotate-y-180 shadow-md">
+                    <span class="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Answer</span>
+                    <p class="text-xs text-slate-200 leading-relaxed text-center">
+                      For every non-trivial functional dependency X &rarr; Y, <strong>X must be a superkey</strong> of the schema.
+                    </p>
+                    <span class="text-[10px] text-slate-400 text-center">&larr; Tap to return</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="perspective-1000 h-48 cursor-pointer" onclick="this.firstElementChild.classList.toggle('rotate-y-180')">
+                <div class="w-full h-full duration-500 transform-style-3d relative transition-transform">
+                  <!-- Front -->
+                  <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-teal-50 to-white rounded-2xl border-2 border-teal-200 p-5 flex flex-col justify-between backface-hidden shadow-sm">
+                    <span class="text-[10px] uppercase font-bold text-teal-600 tracking-wider">Concept Drill</span>
+                    <p class="font-bold text-slate-800 text-sm text-center">Can 3NF always preserve dependencies? What about BCNF?</p>
+                    <span class="text-[10px] text-slate-400 text-center">Tap to flip &rarr;</span>
+                  </div>
+                  <!-- Back -->
+                  <div class="absolute inset-0 w-full h-full bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-between backface-hidden rotate-y-180 shadow-md">
+                    <span class="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Answer</span>
+                    <p class="text-xs text-slate-200 leading-relaxed text-center">
+                      <strong>Yes for 3NF</strong> (always dependency-preserving and lossless). <strong>No for BCNF</strong> (may sacrifice FD preservation).
+                    </p>
+                    <span class="text-[10px] text-slate-400 text-center">&larr; Tap to return</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="perspective-1000 h-48 cursor-pointer" onclick="this.firstElementChild.classList.toggle('rotate-y-180')">
+                <div class="w-full h-full duration-500 transform-style-3d relative transition-transform">
+                  <!-- Front -->
+                  <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-50 to-white rounded-2xl border-2 border-indigo-200 p-5 flex flex-col justify-between backface-hidden shadow-sm">
+                    <span class="text-[10px] uppercase font-bold text-indigo-600 tracking-wider">Concept Drill</span>
+                    <p class="font-bold text-slate-800 text-sm text-center">What is a Prime Attribute in relational theory?</p>
+                    <span class="text-[10px] text-slate-400 text-center">Tap to flip &rarr;</span>
+                  </div>
+                  <!-- Back -->
+                  <div class="absolute inset-0 w-full h-full bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-between backface-hidden rotate-y-180 shadow-md">
+                    <span class="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Answer</span>
+                    <p class="text-xs text-slate-200 leading-relaxed text-center">
+                      An attribute that is a member of <strong>at least one candidate key</strong> for that relation.
+                    </p>
+                    <span class="text-[10px] text-slate-400 text-center">&larr; Tap to return</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doc Tab 5: Mini Quiz (Interactive Scoring!) -->
+          <div id="doc-content-quiz" class="hidden p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Diagnostic Exam Readiness Quiz</h4>
+                <p class="text-xs text-slate-500">Instant feedback &bull; Updates daily productivity score</p>
+              </div>
+              <div id="quiz-score-badge" class="px-3 py-1 rounded-xl bg-slate-100 text-slate-800 font-mono text-xs font-bold">
+                Score: 0 / 2
+              </div>
+            </div>
+
+            <!-- Quiz Question 1 -->
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-3 text-xs">
+              <p class="font-bold text-slate-800">
+                1. Consider schema R(A, B, C) with FDs A &rarr; B and B &rarr; C. In which normal form is R?
+              </p>
+              <div class="space-y-1.5" id="q1-options">
+                <button onclick="checkQuizAnswer(1, 'A', false)" class="w-full text-left p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 transition flex items-center justify-between">
+                  <span>A) BCNF</span>
+                  <span class="text-slate-400 text-[11px]">Option A</span>
+                </button>
+                <button onclick="checkQuizAnswer(1, 'B', false)" class="w-full text-left p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 transition flex items-center justify-between">
+                  <span>B) 3NF</span>
+                  <span class="text-slate-400 text-[11px]">Option B</span>
+                </button>
+                <button onclick="checkQuizAnswer(1, 'C', true)" class="w-full text-left p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 transition flex items-center justify-between">
+                  <span>C) 2NF (Contains transitive dependency A &rarr; C through B)</span>
+                  <span class="text-slate-400 text-[11px]">Option C</span>
+                </button>
+              </div>
+              <div id="q1-feedback" class="hidden text-xs font-semibold p-2.5 rounded-lg"></div>
+            </div>
+
+            <!-- Quiz Question 2 -->
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-3 text-xs">
+              <p class="font-bold text-slate-800">
+                2. Which property is guaranteed to be satisfied by a 3NF decomposition, but NOT guaranteed by BCNF?
+              </p>
+              <div class="space-y-1.5" id="q2-options">
+                <button onclick="checkQuizAnswer(2, 'A', true)" class="w-full text-left p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 transition flex items-center justify-between">
+                  <span>A) Dependency Preservation</span>
+                  <span class="text-slate-400 text-[11px]">Option A</span>
+                </button>
+                <button onclick="checkQuizAnswer(2, 'B', false)" class="w-full text-left p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 transition flex items-center justify-between">
+                  <span>B) Lossless Join Decomposition</span>
+                  <span class="text-slate-400 text-[11px]">Option B</span>
+                </button>
+              </div>
+              <div id="q2-feedback" class="hidden text-xs font-semibold p-2.5 rounded-lg"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 6: STUDENT FINANCE ASSISTANT
+       ========================================================================= -->
+  <section id="finance-assistant" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-3">
+          <i class="fa-solid fa-wallet"></i> Section 06 &bull; Student Finance Assistant
+        </div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Keep Financial Anxiety at Bay
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Weekly budget tracking, expenses by category, predictive spending forecast, spending insights, and affordable alternative suggestions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Finance Card 1: Weekly Breakdown & Category Breakdown -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-900 text-sm">Weekly Budget &amp; Categories</h3>
+            <span class="text-xs font-mono font-bold text-emerald-600">₹820 Left</span>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs text-slate-600 mb-1">
+                <span>Food & Mess (Target: ₹1,400)</span>
+                <span class="font-semibold text-slate-800">₹1,120 spent</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 h-full w-[80%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-600 mb-1">
+                <span>Academics & Printing (Target: ₹400)</span>
+                <span class="font-semibold text-slate-800">₹290 spent</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-indigo-500 h-full w-[72%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-600 mb-1">
+                <span>Commute / Metro (Target: ₹350)</span>
+                <span class="font-semibold text-slate-800">₹180 spent</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-500 h-full w-[51%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-600 mb-1">
+                <span>Social / Leisure (Target: ₹350)</span>
+                <span class="font-semibold text-slate-800">₹90 spent</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-teal-500 h-full w-[25%]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fast Add Transaction Mock -->
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2">Simulate Quick Expense</span>
+            <div class="flex gap-2">
+              <input type="number" id="quick-expense-amount" placeholder="₹ Amount" value="60" class="w-24 text-xs p-2 rounded-xl border border-slate-200 font-medium" />
+              <button onclick="addQuickExpense()" class="flex-1 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-semibold transition">
+                + Log Expense
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Finance Card 2: AI Predictive Forecast & Spending Insights -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-slate-900 text-sm">Budget Forecast &amp; Insights</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Weekend Alert</span>
+            </div>
+
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Based on your past 3 weeks of Friday–Sunday spending patterns (canteen snacks + peer outings):
+            </p>
+
+            <div class="my-4 p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-2">
+              <div class="flex items-center gap-2 text-xs font-bold text-amber-900">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                <span>Predicted Weekend Burn: ₹940</span>
+              </div>
+              <p class="text-[11px] text-amber-800 leading-relaxed">
+                You currently have <strong>₹820</strong> in reserve. Without adjustment, you are projected to exceed your weekly budget by <strong>₹120</strong> on Sunday night.
+              </p>
+            </div>
+
+            <div class="space-y-1.5 text-xs text-slate-600">
+              <div class="flex justify-between">
+                <span>Recommended Friday limit:</span>
+                <span class="font-bold text-slate-800">₹180</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Recommended Saturday limit:</span>
+                <span class="font-bold text-slate-800">₹240</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Recommended Sunday limit:</span>
+                <span class="font-bold text-slate-800">₹200</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 flex items-center justify-between">
+            <span>Safety buffer remaining:</span>
+            <span class="font-bold text-emerald-600">₹200 (Healthy)</span>
+          </div>
+        </div>
+
+        <!-- Finance Card 3: Affordable Alternative Suggestion -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-slate-900 text-sm">Affordable Alternative Suggestions</h3>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Save ₹390</span>
+          </div>
+
+          <p class="text-xs text-slate-500 mb-4">
+            AI identifies peer and mess alternatives before you spend unnecessarily:
+          </p>
+
+          <div class="space-y-3">
+            <!-- Alternative 1: Meal Option Example -->
+            <div class="p-3 bg-emerald-50/60 rounded-xl border border-emerald-200 text-xs space-y-1">
+              <div class="flex items-center justify-between font-bold text-emerald-900">
+                <span>🍱 Meal Option Switch</span>
+                <span class="text-emerald-700 font-extrabold">Save ₹120</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">
+                “You can save ₹120 by choosing this meal option (Central Mess South Indian combo ₹70 instead of Swiggy delivery ₹190).”
+              </p>
+              <button onclick="applySavingsAction('Meal Option Saved ₹120')" class="mt-1 text-[10px] font-bold text-emerald-800 hover:underline">
+                Accept Recommendation &rarr;
+              </button>
+            </div>
+
+            <!-- Alternative 2: Textbook -->
+            <div class="p-3 bg-indigo-50/60 rounded-xl border border-indigo-200 text-xs space-y-1">
+              <div class="flex items-center justify-between font-bold text-indigo-900">
+                <span>📚 Textbook Purchase</span>
+                <span class="text-indigo-700 font-extrabold">Save ₹270</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">
+                “Senior in Hostel Block B is giving away Korth DBMS 7th Edition for ₹250 (Retail ₹520).”
+              </p>
+              <button onclick="applySavingsAction('Marketplace DBMS Book Saved ₹270')" class="mt-1 text-[10px] font-bold text-indigo-800 hover:underline">
+                Reserve via Marketplace &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 7: OPPORTUNITY HUB
+       ========================================================================= -->
+  <section id="opportunities" class="py-16 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-teal-600 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-compass"></i> Section 07 &bull; Opportunity Hub
+          </div>
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Personalized Career &amp; Skill Recommendations
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Internships, Hackathons, Scholarships, Coding Contests, Workshops, and Open-Source Programs scored against your course track.
+          </p>
+        </div>
+
+        <!-- Opportunity Filter Pills -->
+        <div class="mt-4 md:mt-0 flex flex-wrap gap-1.5 text-xs font-semibold" id="opp-filter-buttons">
+          <button onclick="filterOpportunities('all')" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white opp-btn">All</button>
+          <button onclick="filterOpportunities('internship')" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn">Internships</button>
+          <button onclick="filterOpportunities('hackathon')" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn">Hackathons</button>
+          <button onclick="filterOpportunities('scholarship')" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn">Scholarships</button>
+          <button onclick="filterOpportunities('contest')" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn">Coding Contests</button>
+          <button onclick="filterOpportunities('workshop')" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn">Workshops</button>
+          <button onclick="filterOpportunities('opensource')" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn">Open Source</button>
+        </div>
+      </div>
+
+      <!-- Opportunity Cards Grid: Each shows match %, required skills, deadline, action button -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="opp-grid">
+
+        <!-- Card 1: Internship -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between opp-card" data-category="internship">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                <i class="fa-solid fa-certificate"></i> 96% Match
+              </span>
+              <span class="text-xs font-semibold text-rose-500">Closes in 5d</span>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-base">Backend Engineering Intern</h3>
+            <p class="text-xs text-slate-500 font-medium">Razorpay &bull; Bangalore / Hybrid &bull; ₹45,000/mo</p>
+
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Work on distributed payment pipelines, PostgreSQL query indexing, and Redis caching layers.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">PostgreSQL</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Node.js</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">REST API</span>
+              <span class="px-2 py-0.5 bg-rose-50 text-rose-700 rounded text-[10px] font-medium">Docker (Prerequisite)</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="tailorResumeToast('Razorpay Backend Intern')" class="text-xs text-brand-600 font-bold hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-file-pen"></i> AI Resume Tailor
+            </button>
+            <button onclick="applyOpportunityToast('Razorpay')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs">
+              1-Click Apply
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Hackathon -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between opp-card" data-category="hackathon">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-teal-100 text-teal-800 flex items-center gap-1">
+                <i class="fa-solid fa-certificate"></i> 94% Match
+              </span>
+              <span class="text-xs font-semibold text-amber-600">Closes in 4d</span>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-base">Smart India Hackathon 2026</h3>
+            <p class="text-xs text-slate-500 font-medium">Govt of India &bull; Nationwide &bull; ₹1,50,000 Prize Pool</p>
+
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Theme: AI & Cognitive Tools in Higher Education. Matches your current Capstone project architecture!
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Full Stack</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">NLP / RAG</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Team of 4-6</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="tailorResumeToast('Smart India Hackathon')" class="text-xs text-teal-700 font-bold hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-users"></i> Find Teammates
+            </button>
+            <button onclick="applyOpportunityToast('SIH 2026')" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs">
+              Join Team
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3: Scholarship -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between opp-card" data-category="scholarship">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-indigo-100 text-indigo-800 flex items-center gap-1">
+                <i class="fa-solid fa-certificate"></i> 91% Match
+              </span>
+              <span class="text-xs font-semibold text-slate-400">Closes in 18d</span>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-base">Adobe Women in Tech Scholarship</h3>
+            <p class="text-xs text-slate-500 font-medium">Adobe India &bull; ₹1,00,000 Grant + Mentorship</p>
+
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Open to CS/IT undergrads with strong academic standing and demonstrated software engineering passion.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">GPA &gt; 8.0</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Essay Review</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">B.Tech 3rd Yr</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="tailorResumeToast('Adobe Scholarship Essay')" class="text-xs text-brand-600 font-bold hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> SOP Assistant
+            </button>
+            <button onclick="applyOpportunityToast('Adobe Scholarship')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs">
+              Review Criteria
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 4: Coding Contest -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between opp-card" data-category="contest">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 flex items-center gap-1">
+                <i class="fa-solid fa-certificate"></i> 89% Match
+              </span>
+              <span class="text-xs font-semibold text-rose-500">Starts Tomorrow</span>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-base">CodeChef Starters 128</h3>
+            <p class="text-xs text-slate-500 font-medium">Rated for Div 2 & 3 &bull; 8:00 PM IST (2 Hours)</p>
+
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Sharpen dynamic programming and tree traversal speed ahead of upcoming technical placements.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Algorithms</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">C++ / Java / Python</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Rating Boost</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500">32 Friends Participating</span>
+            <button onclick="applyOpportunityToast('CodeChef Starters')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs">
+              Set Alarm
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 5: Workshop -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between opp-card" data-category="workshop">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-purple-100 text-purple-800 flex items-center gap-1">
+                <i class="fa-solid fa-certificate"></i> 93% Match
+              </span>
+              <span class="text-xs font-semibold text-indigo-500">This Saturday</span>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-base">Hands-On Docker & Kubernetes Workshop</h3>
+            <p class="text-xs text-slate-500 font-medium">Campus ACM Chapter &bull; Virtual Hands-On Lab</p>
+
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Learn container orchestration and CI/CD pipelines to fulfill the prerequisite for backend internships.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">DevOps</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Containers</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Free Entry</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500">Certificate Provided</span>
+            <button onclick="applyOpportunityToast('Docker Workshop')" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs">
+              Register Free
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 6: Open Source Program -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between opp-card" data-category="opensource">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-teal-100 text-teal-800 flex items-center gap-1">
+                <i class="fa-solid fa-certificate"></i> 98% Match
+              </span>
+              <span class="text-xs font-semibold text-emerald-600">Open Now</span>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-base">Google Summer of Code (GSoC) 2026</h3>
+            <p class="text-xs text-slate-500 font-medium">PostgreSQL / Git Organization &bull; Stipend: $3,000</p>
+
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Contribute to core SQL engine query optimizations and relational indexing structures.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">C Systems</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Database Internals</span>
+              <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-medium">Git</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500">Proposal Due April 2</span>
+            <button onclick="applyOpportunityToast('GSoC 2026')" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs">
+              View Org Ideas
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 8: PERSONALIZED STUDENT MARKETPLACE (RECOMMENDATION LAYER)
+       ========================================================================= -->
+  <section id="marketplace" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Architectural Transparency Disclaimer Banner -->
+      <div class="mb-8 p-4 rounded-2xl bg-indigo-50/80 border border-indigo-200 text-xs text-indigo-900 flex items-start gap-3">
+        <div class="w-8 h-8 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm">
+            CampusPulse is an AI Recommendation Layer — Not an E-Commerce Platform
+          </h4>
+          <p class="text-slate-600 text-xs mt-1 leading-relaxed">
+            CampusPulse does not hold inventory, take supplier commissions, or execute retail checkouts. We operate purely as an <strong>intelligent recommendation and peer discovery layer</strong> that matches semester books, lab equipment, stationery, electronics, hostel essentials, and healthy meals based on your current academic calendar, weather season, and discretionary budget.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-bag-shopping"></i> Section 08 &bull; Personalized Student Marketplace
+          </div>
+          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            High-Yield Campus Gear & Course Supplies
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Recommendations tailored for Alex (Semester 5 CSE &bull; CS302 &bull; ₹820 available budget).
+          </p>
+        </div>
+
+        <div class="mt-4 md:mt-0 flex items-center gap-2 text-xs text-slate-500">
+          <span>Match Criterion:</span>
+          <span class="font-bold text-slate-800 bg-white px-2.5 py-1 rounded-lg border border-slate-200">Course Relevance &amp; Budget</span>
+        </div>
+      </div>
+
+      <!-- Marketplace Cards Grid: All 6 Categories -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Category 1: Semester Books -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2 font-medium">
+              <span class="px-2 py-0.5 rounded bg-brand-50 text-brand-700 font-bold">1. Semester Books</span>
+              <span class="text-emerald-600 font-bold">65% Off Retail</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Database System Concepts (Korth 7th Ed)</h3>
+            <p class="text-xs text-slate-500 mt-1">Condition: Excellent &bull; Senior in Hostel C-304</p>
+            
+            <div class="my-3 p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600">
+              💡 <em>Recommended because you take CS302 and exam is in 3 days.</em>
+            </div>
+
+            <div class="flex items-baseline gap-2">
+              <span class="text-lg font-extrabold text-slate-900">₹250</span>
+              <span class="text-xs text-slate-400 line-through">₹720 new</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Hostel Pick-up</span>
+            <button onclick="marketplaceContactToast('Korth DBMS Book', 'Senior Rohan (Hostel C-304)')" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs">
+              Contact Senior
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 2: Lab Equipment -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2 font-medium">
+              <span class="px-2 py-0.5 rounded bg-teal-50 text-teal-700 font-bold">2. Lab Equipment</span>
+              <span class="text-slate-400">Available Today</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Arduino Uno + Sensor Starter Breadboard</h3>
+            <p class="text-xs text-slate-500 mt-1">Required for Embedded Systems Lab (Sem 5)</p>
+            
+            <div class="my-3 p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600">
+              💡 <em>Club rental pool &bull; Return at semester end for full deposit refund.</em>
+            </div>
+
+            <div class="flex items-baseline gap-2">
+              <span class="text-lg font-extrabold text-slate-900">₹150 <span class="text-xs font-normal text-slate-400">/ semester</span></span>
+              <span class="text-xs text-slate-400 line-through">₹850 purchase</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Robotics Club Lab</span>
+            <button onclick="marketplaceContactToast('Arduino Lab Kit', 'Robotics Club Lead')" class="px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs">
+              Request Rental
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 3: Stationery & Printing -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2 font-medium">
+              <span class="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 font-bold">3. Stationery &amp; Printing</span>
+              <span class="text-indigo-700 font-bold">Campus Repro Vouchers</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Bulk Lab Record Printing & Spiral Binding</h3>
+            <p class="text-xs text-slate-500 mt-1">Campus Xerox Co-op &bull; 100 Pages + Hard Cover</p>
+            
+            <div class="my-3 p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600">
+              💡 <em>Save ₹90 with the CampusPulse student co-op discount token.</em>
+            </div>
+
+            <div class="flex items-baseline gap-2">
+              <span class="text-lg font-extrabold text-slate-900">₹110</span>
+              <span class="text-xs text-slate-400 line-through">₹200 external</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Coupon: REPRO110</span>
+            <button onclick="marketplaceContactToast('Printing Voucher', 'Library Co-op')" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs">
+              Get Voucher
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 4: Electronics -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2 font-medium">
+              <span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-bold">4. Electronics</span>
+              <span class="text-emerald-700 font-bold">Refurbished</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Casio fx-991EX Scientific Calculator</h3>
+            <p class="text-xs text-slate-500 mt-1">Verified Condition &bull; Graduating Batch Hand-over</p>
+            
+            <div class="my-3 p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600">
+              💡 <em>Permitted in university examinations for Probability & Stats.</em>
+            </div>
+
+            <div class="flex items-baseline gap-2">
+              <span class="text-lg font-extrabold text-slate-900">₹450</span>
+              <span class="text-xs text-slate-400 line-through">₹1,495 retail</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Hostel D-Block</span>
+            <button onclick="marketplaceContactToast('Scientific Calculator', 'Arun (Hostel D-112)')" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs">
+              Contact Senior
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 5: Hostel Essentials -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2 font-medium">
+              <span class="px-2 py-0.5 rounded bg-amber-50 text-amber-800 font-bold">5. Hostel Essentials</span>
+              <span class="text-amber-700 font-bold">Exam Night Special</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Pigeon 1.5L Kettle + Clip-On Reading Lamp</h3>
+            <p class="text-xs text-slate-500 mt-1">Hostel Room Combo &bull; Working Heating Element</p>
+            
+            <div class="my-3 p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600">
+              💡 <em>Perfect for late night tea during exam sprint without disturbing roommate.</em>
+            </div>
+
+            <div class="flex items-baseline gap-2">
+              <span class="text-lg font-extrabold text-slate-900">₹320</span>
+              <span class="text-xs text-slate-400 line-through">₹950 combined</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Hostel B-201</span>
+            <button onclick="marketplaceContactToast('Hostel Kettle Combo', 'Kiran (Hostel B-201)')" class="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs">
+              Reserve Item
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 6: Healthy Meals -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft hover:shadow-card transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2 font-medium">
+              <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">6. Healthy Meals</span>
+              <span class="text-emerald-700 font-bold">Nutrition Approved</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm">Exam Season Evening Fresh Fruit Bowl</h3>
+            <p class="text-xs text-slate-500 mt-1">Central Canteen &bull; Seasonal fruits, nuts &amp; fresh curd</p>
+            
+            <div class="my-3 p-2.5 bg-slate-50 rounded-xl text-[11px] text-slate-600">
+              💡 <em>Prevents post-dinner carb lethargy during critical evening study hours.</em>
+            </div>
+
+            <div class="flex items-baseline gap-2">
+              <span class="text-lg font-extrabold text-slate-900">₹40</span>
+              <span class="text-xs text-slate-400 line-through">₹90 retail</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400">Token: PULSE40</span>
+            <button onclick="marketplaceContactToast('Fruit Bowl Voucher', 'Central Canteen')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs">
+              Claim Voucher
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 9: CONTEXT-AWARE RECOMMENDATION EXAMPLE
+       ========================================================================= -->
+  <section id="context-engine" class="py-16 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200 mb-3">
+          <i class="fa-solid fa-microchip"></i> Section 09 &bull; Context-Aware Recommendation Engine
+        </div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          How Context Turns Confusion into Absolute Clarity
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Generic productivity apps treat all tasks equally. CampusPulse recalculates the student's optimal path in real-time across academic, financial, and personal constraints.
+        </p>
+      </div>
+
+      <!-- Interactive Scenario Selector -->
+      <div class="max-w-4xl mx-auto">
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
+          <button onclick="simulateContextAction('exam_rush')" id="scenario-btn-exam_rush" class="px-4 py-2.5 rounded-xl font-semibold text-xs transition bg-slate-900 text-white shadow-md scenario-btn">
+            Scenario A: Exam in 3 Days + Low Budget + 2 Free Hours Tonight
+          </button>
+          <button onclick="simulateContextAction('weekend_chill')" id="scenario-btn-weekend_chill" class="px-4 py-2.5 rounded-xl font-semibold text-xs transition bg-slate-100 text-slate-700 hover:bg-slate-200 scenario-btn">
+            Scenario B: Friday Free + Healthy Budget + Hackathon Due
+          </button>
+          <button onclick="simulateContextAction('placement_prep')" id="scenario-btn-placement_prep" class="px-4 py-2.5 rounded-xl font-semibold text-xs transition bg-slate-100 text-slate-700 hover:bg-slate-200 scenario-btn">
+            Scenario C: High Fatigue + 8:00 AM Lab Tomorrow
+          </button>
+        </div>
+
+        <!-- The Simulation Box -->
+        <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-2xl relative overflow-hidden">
+          
+          <!-- Context Input Vector Readout -->
+          <div class="bg-slate-800/80 rounded-xl p-4 border border-slate-700/80 mb-6">
+            <span class="text-[10px] font-mono uppercase text-brand-300 font-bold block mb-2">
+              <i class="fa-solid fa-code mr-1"></i> Multi-Dimensional Input State Vector:
+            </span>
+            <div id="context-vector-readout" class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+              <div class="bg-slate-900/60 p-2.5 rounded-lg">
+                <span class="text-slate-400 block text-[10px]">EXAM HORIZON</span>
+                <span id="vec-exam" class="font-bold text-rose-400">72 Hours (DBMS)</span>
+              </div>
+              <div class="bg-slate-900/60 p-2.5 rounded-lg">
+                <span class="text-slate-400 block text-[10px]">AVAILABLE BUDGET</span>
+                <span id="vec-budget" class="font-bold text-amber-400">₹380 (Low)</span>
+              </div>
+              <div class="bg-slate-900/60 p-2.5 rounded-lg">
+                <span class="text-slate-400 block text-[10px]">FREE TIME TONIGHT</span>
+                <span id="vec-time" class="font-bold text-teal-400">2.0 Hours</span>
+              </div>
+              <div class="bg-slate-900/60 p-2.5 rounded-lg">
+                <span class="text-slate-400 block text-[10px]">ENERGY LEVEL</span>
+                <span id="vec-energy" class="font-bold text-indigo-400">65% (Medium)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- The AI Synthesized Prescriptive Recommendation -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                AI Tri-Pronged Prescriptive Directive
+              </span>
+            </div>
+
+            <div id="context-rec-body" class="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-4">
+              <h3 id="context-rec-title" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug">
+                “Revise DBMS normalization for 45 minutes, skip paid food delivery today, and apply for the hackathon tomorrow.”
+              </h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs">
+                <div class="p-3 bg-brand-500/15 rounded-xl border border-brand-400/20">
+                  <span class="text-brand-300 font-bold block mb-1">📚 Academic Directive</span>
+                  <span id="context-detail-academic" class="text-slate-200">
+                    45m focus sprint on BCNF & 3NF flashcards. Yields highest point return before bedtime.
+                  </span>
+                </div>
+                <div class="p-3 bg-amber-500/15 rounded-xl border border-amber-400/20">
+                  <span class="text-amber-300 font-bold block mb-1">💰 Financial Directive</span>
+                  <span id="context-detail-finance" class="text-slate-200">
+                    Skip paid food delivery tonight; use mess coupon to protect your ₹380 reserve for weekend printouts.
+                  </span>
+                </div>
+                <div class="p-3 bg-teal-500/15 rounded-xl border border-teal-400/20">
+                  <span class="text-teal-300 font-bold block mb-1">🚀 Career Directive</span>
+                  <span id="context-detail-career" class="text-slate-200">
+                    Apply for the hackathon tomorrow afternoon during your 3:30 PM gap; zero impact on review score.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 pt-4 border-t border-slate-800">
+            <span>Model: CampusPulse Context-Ranker v2 (Deterministic + Heuristic Reranker)</span>
+            <span class="text-emerald-400 font-mono font-semibold"><i class="fa-solid fa-check-double mr-1"></i> Zero Decision Paralysis</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 10: TECHNICAL ARCHITECTURE SECTION
+       ========================================================================= -->
+  <section id="architecture" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+          <i class="fa-solid fa-network-wired"></i> Section 10 &bull; Technical Architecture
+        </div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          System Architecture & Algorithmic Foundations
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Engineered as an asynchronous, privacy-preserving full-stack platform. Built to scale seamlessly across universities.
+        </p>
+      </div>
+
+      <!-- Visual Architectural Layer Diagram with Cards and Arrows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-soft mb-12">
+        <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <i class="fa-solid fa-sitemap text-brand-600"></i> Visual Multi-Tier Architecture &amp; Data Pipeline
+        </h3>
+
+        <!-- Flow Diagram Container with Cards and Arrows -->
+        <div class="grid grid-cols-1 md:grid-cols-7 gap-2 items-center text-xs">
+          
+          <!-- Layer 1: Frontend -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-brand-500 transition">
+            <span class="font-mono text-[10px] text-brand-600 font-bold uppercase">Tier 01</span>
+            <div class="my-2">
+              <h4 class="font-bold text-slate-900">Frontend UI</h4>
+              <p class="text-slate-500 text-[11px] mt-1">Responsive PWA, Mobile & Web Prototype</p>
+            </div>
+            <div class="pt-2 border-t border-slate-200 text-[10px] text-slate-400 font-mono">Tailwind &bull; WebSockets</div>
+          </div>
+
+          <!-- Arrow 1 -->
+          <div class="hidden md:flex items-center justify-center text-slate-400">
+            <i class="fa-solid fa-arrow-right text-lg"></i>
+          </div>
+
+          <!-- Layer 2: Backend API -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-brand-500 transition">
+            <span class="font-mono text-[10px] text-indigo-600 font-bold uppercase">Tier 02</span>
+            <div class="my-2">
+              <h4 class="font-bold text-slate-900">Backend API</h4>
+              <p class="text-slate-500 text-[11px] mt-1">FastAPI Gateway, JWT Auth &amp; Async Routing</p>
+            </div>
+            <div class="pt-2 border-t border-slate-200 text-[10px] text-slate-400 font-mono">Python AsyncIO &bull; Redis</div>
+          </div>
+
+          <!-- Arrow 2 -->
+          <div class="hidden md:flex items-center justify-center text-slate-400">
+            <i class="fa-solid fa-arrow-right text-lg"></i>
+          </div>
+
+          <!-- Layer 3: AI / NLP & Recommender -->
+          <div class="p-4 rounded-2xl bg-brand-50/80 border-2 border-brand-300 flex flex-col justify-between shadow-sm">
+            <span class="font-mono text-[10px] text-brand-700 font-bold uppercase">Tier 03 (Core)</span>
+            <div class="my-2">
+              <h4 class="font-bold text-brand-900">AI / NLP &amp; Recommender</h4>
+              <p class="text-slate-600 text-[11px] mt-1">LLM Summarizer + Context Ranker (CAR)</p>
+            </div>
+            <div class="pt-2 border-t border-brand-200 text-[10px] text-brand-700 font-mono">RAG &bull; Hybrid Filtering</div>
+          </div>
+
+          <!-- Arrow 3 -->
+          <div class="hidden md:flex items-center justify-center text-slate-400">
+            <i class="fa-solid fa-arrow-right text-lg"></i>
+          </div>
+
+          <!-- Layer 4: Database & Integrations -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-brand-500 transition">
+            <span class="font-mono text-[10px] text-teal-600 font-bold uppercase">Tier 04</span>
+            <div class="my-2">
+              <h4 class="font-bold text-slate-900">Database &amp; Sync</h4>
+              <p class="text-slate-500 text-[11px] mt-1">PostgreSQL + Calendar/Email/PDF Parser</p>
+            </div>
+            <div class="pt-2 border-t border-slate-200 text-[10px] text-slate-400 font-mono">pgvector &bull; Webhooks</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Algorithmic Deep Dives Grid: Explaining all 6 key concepts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- 1. LLM for Summarization & Planning -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-base mb-4">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">1. LLM for Summarization & Planning</h3>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Lecture slide decks and syllabus PDFs are parsed into semantic chunks, vectorized, and queried through localized <strong>Retrieval-Augmented Generation (RAG)</strong> to generate exam summaries, flashcards, and spaced study plans without hallucination.
+          </p>
+        </div>
+
+        <!-- 2. Hybrid Recommendation System -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-base mb-4">
+            <i class="fa-solid fa-code-merge"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">2. Hybrid Recommendation System</h3>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Unifies multiple machine learning strategies to deliver highly accurate opportunity and resource suggestions. Solves the cold-start problem by falling back to verified syllabus prerequisites.
+          </p>
+        </div>
+
+        <!-- 3. Content-Based Filtering -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-base mb-4">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">3. Content-Based Filtering</h3>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Extracts feature vectors from course enrollments (e.g. SQL, C++, POSIX threads) and matches them against internship role descriptions using Cosine Similarity over term embeddings.
+          </p>
+        </div>
+
+        <!-- 4. Collaborative Filtering -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-base mb-4">
+            <i class="fa-solid fa-users-viewfinder"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">4. Collaborative Filtering</h3>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Analyzes historical engagement and placement success patterns of senior students in the same department to surface high-converting hackathons and second-hand semester textbooks.
+          </p>
+        </div>
+
+        <!-- 5. Rule-Based Priority Scoring -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-base mb-4">
+            <i class="fa-solid fa-gavel"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">5. Rule-Based Priority Scoring</h3>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Enforces hard constraints: Deadlines under 24 hours, mandatory lab prerequisites, and zero-balance budget safety floors override probabilistic recommendations immediately.
+          </p>
+        </div>
+
+        <!-- 6. Context-Aware Ranking (CAR) -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-soft">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-base mb-4">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">6. Context-Aware Ranking (CAR)</h3>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Dynamically recalculates candidate rank weights based on temporal proximity to exams (&Delta;t), current available weekly budget, time of day, and student fatigue index.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 11: FEATURE FUNCTIONALITY MODAL / EXPANDABLE CARDS
+       ========================================================================= -->
+  <section id="features-matrix" class="py-16 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 mb-3">
+          <i class="fa-solid fa-list-check"></i> Section 11 &bull; Feature Functionality Explorer
+        </div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          What It Does, Inputs, Outputs &amp; Student Benefit
+        </h2>
+        <p class="text-slate-600 text-sm mt-2">
+          Click any card below to open the complete functional engineering specification.
+        </p>
+      </div>
+
+      <!-- 6 Expandable Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Spec 1: AI Coach -->
+        <div onclick="openFeatureModal('coach')" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 hover:shadow-soft transition cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Feature 01</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-brand-600 transition"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition">AI Productivity Coach</h3>
+          <p class="text-xs text-slate-500 mt-1">Recommends one single next action with zero cognitive overhead.</p>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[11px] text-slate-600 font-medium">
+            <span>Input: Calendar, Deadlines</span>
+            <span class="text-brand-600 font-semibold">Inspect Spec &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Spec 2: Academic Assistant -->
+        <div onclick="openFeatureModal('academic')" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 hover:shadow-soft transition cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Feature 02</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-brand-600 transition"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition">Smart Academic Assistant</h3>
+          <p class="text-xs text-slate-500 mt-1">Adaptive study schedule rebalanced as exams approach.</p>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[11px] text-slate-600 font-medium">
+            <span>Input: Course Syllabi, Quizzes</span>
+            <span class="text-brand-600 font-semibold">Inspect Spec &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Spec 3: PDF Studio -->
+        <div onclick="openFeatureModal('pdf')" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 hover:shadow-soft transition cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Feature 03</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-brand-600 transition"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition">Notes & PDF Summarization Studio</h3>
+          <p class="text-xs text-slate-500 mt-1">Extracts high-yield formulas, flashcards, and interactive tests.</p>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[11px] text-slate-600 font-medium">
+            <span>Input: PDF / PPT Lecture Slides</span>
+            <span class="text-brand-600 font-semibold">Inspect Spec &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Spec 4: Finance -->
+        <div onclick="openFeatureModal('finance')" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 hover:shadow-soft transition cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Feature 04</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-emerald-600 transition"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition">Student Finance Assistant</h3>
+          <p class="text-xs text-slate-500 mt-1">Predicts weekend deficit and suggests immediate mess/peer savings.</p>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[11px] text-slate-600 font-medium">
+            <span>Input: Weekly Allowance, Spends</span>
+            <span class="text-emerald-600 font-semibold">Inspect Spec &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Spec 5: Opportunity Hub -->
+        <div onclick="openFeatureModal('opp')" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 hover:shadow-soft transition cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Feature 05</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-teal-600 transition"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-teal-600 transition">Opportunity Hub</h3>
+          <p class="text-xs text-slate-500 mt-1">Recommends verified internships and hackathons matching coursework.</p>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[11px] text-slate-600 font-medium">
+            <span>Input: Course Records, GitHub</span>
+            <span class="text-teal-600 font-semibold">Inspect Spec &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Spec 6: Marketplace -->
+        <div onclick="openFeatureModal('marketplace')" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 hover:shadow-soft transition cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Feature 06</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-brand-600 transition"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition">Personalized Student Marketplace</h3>
+          <p class="text-xs text-slate-500 mt-1">Recommendation layer for textbooks, tools, and campus mess discounts.</p>
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[11px] text-slate-600 font-medium">
+            <span>Input: Semester, Budget, Hostel</span>
+            <span class="text-brand-600 font-semibold">Inspect Spec &rarr;</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 12: SUPERVISOR PITCH SECTION
+       ========================================================================= -->
+  <section id="supervisor-pitch" class="py-16 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-brand-500/20 text-brand-300 border border-brand-400/30 mb-3">
+          <i class="fa-solid fa-award"></i> Section 12 &bull; Supervisor Pitch &amp; Capstone Evaluation
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Why CampusPulse is an Outstanding Capstone Project
+        </h2>
+        <p class="text-slate-300 text-sm mt-2">
+          Structured justification for final year engineering project evaluation, technical review committee, and academic publication.
+        </p>
+      </div>
+
+      <!-- 6 Core Capstone Evaluation Criteria -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+        <!-- 1. Why Good Capstone -->
+        <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-base">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">1. Why It's a Good Capstone</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Synthesizes multiple engineering disciplines: Machine Learning, Asynchronous Systems, Natural Language Processing, and Human-Computer Interaction into a cohesive, user-validated solution.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700/80 text-[11px] text-brand-300 font-mono">
+            High academic rigor &bull; Defensible methodology
+          </div>
+        </div>
+
+        <!-- 2. Real-World Problem -->
+        <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-base">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">2. Real-World Problem</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Undergraduates suffer from severe decision fatigue due to fragmented tools (LMS, Google Calendar, Splitwise, LinkedIn, Notion). CampusPulse tackles the underlying cognitive overload directly.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700/80 text-[11px] text-rose-300 font-mono">
+            Directly impacts 40M+ university students
+          </div>
+        </div>
+
+        <!-- 3. AI/ML Implementation -->
+        <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-base">
+                <i class="fa-solid fa-brain"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">3. AI/ML Implementation</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Integrates RAG with vector embeddings for PDF lecture synthesis alongside a multi-objective Context-Aware Ranking (CAR) algorithm that weights exam urgency, budget status, and fatigue in real time.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700/80 text-[11px] text-indigo-300 font-mono">
+            Hybrid filtering + RAG embeddings
+          </div>
+        </div>
+
+        <!-- 4. Full-Stack Scope -->
+        <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-base">
+                <i class="fa-solid fa-cubes"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">4. Full-Stack Scope</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Spans responsive client-side progressive web applications, asynchronous FastAPI REST APIs, relational PostgreSQL databases with pgvector, and external calendar/email webhooks.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700/80 text-[11px] text-teal-300 font-mono">
+            Complete production architecture
+          </div>
+        </div>
+
+        <!-- 5. Scalable Product Idea -->
+        <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">5. Scalable Product Idea</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Designed with a privacy-first multi-tenant campus architecture. Universities can deploy localized instances connected to their existing LMS with zero cross-campus data leakage.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700/80 text-[11px] text-emerald-300 font-mono">
+            SaaS campus pilot potential
+          </div>
+        </div>
+
+        <!-- 6. Demo Feasibility -->
+        <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base">
+                <i class="fa-solid fa-circle-play"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">6. Demo Feasibility</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              100% stable presentation demo. Features interactive Pomodoro focus timers, dynamic context switching, instant PDF summarization, interactive flashcards, and live quiz scoring during viva examination.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-700/80 text-[11px] text-amber-300 font-mono">
+            Presentation-ready capstone demo
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 13: FOOTER
+       ========================================================================= -->
+  <footer class="bg-slate-950 text-slate-400 text-xs py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800/80">
+        <!-- Logo & Tagline -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white font-bold">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <span class="font-extrabold text-base text-white">CampusPulse</span>
+            <span class="text-brand-400 font-medium ml-1.5">— Keep Moving Forward.</span>
+            <p class="text-[11px] text-slate-500 mt-0.5">Autonomous Context-Aware AI Companion for Higher Education</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="flex flex-wrap items-center gap-4 text-slate-400 text-xs">
+          <a href="#hero" class="hover:text-white transition">Top</a>
+          <a href="#dashboard" class="hover:text-white transition">Dashboard</a>
+          <a href="#productivity-coach" class="hover:text-white transition">AI Coach</a>
+          <a href="#academic-assistant" class="hover:text-white transition">Academics</a>
+          <a href="#notes-summarizer" class="hover:text-white transition">PDF Studio</a>
+          <a href="#finance-assistant" class="hover:text-white transition">Finance</a>
+          <a href="#opportunities" class="hover:text-white transition">Opportunities</a>
+          <a href="#architecture" class="hover:text-white transition">Architecture</a>
+          <a href="#supervisor-pitch" class="hover:text-white transition">Supervisor Pitch</a>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div>
+          &copy; 2026 CampusPulse Project Team &bull; <strong>Keep Moving Forward</strong>. Designed for Capstone Evaluation.
+        </div>
+        <div class="flex items-center gap-3">
+          <span>HTML5 &bull; Tailwind CSS &bull; Vanilla JavaScript &bull; Standalone Single File</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span class="text-emerald-400 font-semibold">100% Presentation Ready</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       INTERACTIVE MODALS & OVERLAYS
+       ========================================================================= -->
+
+  <!-- Modal 1: Interactive Focus Timer (Pomodoro with real clock + sound chime) -->
+  <div id="focus-timer-modal" class="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border border-slate-200 shadow-2xl relative">
+      
+      <!-- Close button -->
+      <button onclick="closeFocusTimerModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl font-bold">
+        &times;
+      </button>
+
+      <div class="text-center">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200 mb-4">
+          <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+          <span>Focus Session Active</span>
+        </span>
+
+        <h3 id="focus-modal-task-title" class="text-lg font-extrabold text-slate-900">
+          DBMS Assignment 3: Question 2
+        </h3>
+        <p class="text-xs text-slate-500 mt-1">25-minute sprint &bull; Eliminate distractions</p>
+
+        <!-- Big Countdown Display -->
+        <div class="my-8">
+          <div class="w-48 h-48 mx-auto rounded-full border-4 border-brand-100 flex flex-col items-center justify-center bg-gradient-to-b from-brand-50/40 to-white shadow-inner relative">
+            <span id="focus-timer-display" class="font-mono text-5xl font-black text-slate-900 tracking-tight">25:00</span>
+            <span id="focus-timer-status" class="text-xs font-bold uppercase tracking-wider text-brand-600 mt-2">Ready to Start</span>
+          </div>
+        </div>
+
+        <!-- Timer Controls: Start, Reset, Tone -->
+        <div class="flex items-center justify-center gap-3">
+          <button id="timer-toggle-btn" onclick="toggleFocusTimer()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md shadow-brand-500/30 transition flex items-center gap-2">
+            <i class="fa-solid fa-play" id="timer-toggle-icon"></i>
+            <span id="timer-toggle-label">Start Timer</span>
+          </button>
+          
+          <button onclick="resetFocusTimer()" class="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="Reset to 25 mins">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+
+          <button onclick="playAmbientTone()" class="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="Toggle Binaural Focus Tone">
+            <i class="fa-solid fa-headphones"></i>
+          </button>
+        </div>
+
+        <p class="text-[11px] text-slate-400 mt-6">
+          Finishing this session awards <strong class="text-brand-600">+15 Productivity Points</strong> to your daily index.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal 2: Reschedule Action Modal -->
+  <div id="reschedule-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 border border-slate-200 shadow-2xl relative">
+      <button onclick="closeRescheduleModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">
+        &times;
+      </button>
+
+      <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+        <i class="fa-regular fa-clock text-brand-600"></i> Reschedule Task
+      </h3>
+      <p class="text-xs text-slate-500 mt-1">Select an optimal calendar slot that won't disrupt exam readiness:</p>
+
+      <div class="mt-4 space-y-2 text-xs">
+        <button onclick="executeReschedule('Tonight, 07:30 PM (Post-Dinner)')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-brand-50/40 transition">
+          <div class="font-bold text-slate-800">Tonight, 07:30 PM (Recommended)</div>
+          <div class="text-[11px] text-slate-500">Uninterrupted 1.5h post-dinner window</div>
+        </button>
+
+        <button onclick="executeReschedule('Tomorrow, 07:30 AM (Before Class)')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-brand-50/40 transition">
+          <div class="font-bold text-slate-800">Tomorrow Morning, 07:30 AM</div>
+          <div class="text-[11px] text-slate-500">Early revision sprint before 9 AM submission</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Feature Deep-Dive Specification Modal -->
+  <div id="feature-detail-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-slate-200 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeFeatureModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl font-bold">
+        &times;
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div id="feature-modal-icon-container" class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-lg font-bold">
+          <i class="fa-solid fa-code" id="feature-modal-icon"></i>
+        </div>
+        <div>
+          <h3 id="feature-modal-title" class="font-extrabold text-slate-900 text-lg">Feature Details</h3>
+          <span id="feature-modal-tag" class="text-[10px] font-bold uppercase tracking-wider text-brand-600">Module Specification</span>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-700">
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-1 text-brand-700">
+            <i class="fa-solid fa-circle-question"></i> What It Does
+          </h4>
+          <p id="feature-modal-does" class="leading-relaxed text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200"></p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-1 text-indigo-700">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Input Required
+          </h4>
+          <p id="feature-modal-input" class="leading-relaxed text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200"></p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-1 text-teal-700">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Output Generated
+          </h4>
+          <p id="feature-modal-output" class="leading-relaxed text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200"></p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-1 text-emerald-700">
+            <i class="fa-solid fa-graduation-cap"></i> Student Benefit
+          </h4>
+          <p id="feature-modal-benefit" class="leading-relaxed text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200 font-medium"></p>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-slate-100 text-right">
+        <button onclick="closeFeatureModal()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition">
+          Close Specification
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- =========================================================================
+       CLIENT-SIDE VANILLA JAVASCRIPT LOGIC
+       ========================================================================= -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 1. Navigation & Helper Functions
+    // -------------------------------------------------------------------------
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const bgColors = {
+        success: 'bg-slate-900 text-white border-emerald-500',
+        info: 'bg-brand-900 text-white border-brand-400',
+        warning: 'bg-amber-900 text-white border-amber-400'
+      };
+
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        info: 'fa-circle-info text-brand-400',
+        warning: 'fa-triangle-exclamation text-amber-400'
+      };
+
+      toast.className = `flex items-center gap-3 px-4 py-3 rounded-2xl border shadow-xl text-xs font-medium pointer-events-auto transition-all duration-300 transform translate-y-5 opacity-0 ${bgColors[type] || bgColors.success}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.success} text-base"></i>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+      
+      // Animate in
+      setTimeout(() => {
+        toast.classList.remove('translate-y-5', 'opacity-0');
+      }, 10);
+
+      // Auto dismiss
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // -------------------------------------------------------------------------
+    // 2. Focus Timer (Pomodoro with Real 25:00 Clock & Audio Tone)
+    // -------------------------------------------------------------------------
+    let timerInterval = null;
+    let timerSeconds = 25 * 60;
+    let isTimerRunning = false;
+
+    function openFocusTimerModal(taskName = 'DBMS Assignment 3: Question 2') {
+      document.getElementById('focus-modal-task-title').innerText = taskName;
+      document.getElementById('focus-timer-modal').classList.remove('hidden');
+    }
+
+    function closeFocusTimerModal() {
+      document.getElementById('focus-timer-modal').classList.add('hidden');
+    }
+
+    function toggleFocusTimer() {
+      const btnLabel = document.getElementById('timer-toggle-label');
+      const btnIcon = document.getElementById('timer-toggle-icon');
+      const statusText = document.getElementById('focus-timer-status');
+
+      if (isTimerRunning) {
+        // Pause
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        btnLabel.innerText = 'Resume';
+        btnIcon.className = 'fa-solid fa-play';
+        statusText.innerText = 'Paused';
+        statusText.className = 'text-xs font-bold uppercase tracking-wider text-amber-500 mt-2';
+      } else {
+        // Start
+        isTimerRunning = true;
+        btnLabel.innerText = 'Pause';
+        btnIcon.className = 'fa-solid fa-pause';
+        statusText.innerText = 'Deep Focus In Progress';
+        statusText.className = 'text-xs font-bold uppercase tracking-wider text-emerald-500 mt-2';
+        
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            playChimeSound();
+            showToast('🎉 Focus Sprint Completed! +15 Productivity Points Awarded!', 'success');
+            increaseProductivityScore(15);
+            closeFocusTimerModal();
+            resetFocusTimer();
+          }
+        }, 1000);
+      }
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById('focus-timer-display').innerText = 
+        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function resetFocusTimer() {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      timerSeconds = 25 * 60;
+      updateTimerDisplay();
+      document.getElementById('timer-toggle-label').innerText = 'Start Timer';
+      document.getElementById('timer-toggle-icon').className = 'fa-solid fa-play';
+      document.getElementById('focus-timer-status').innerText = 'Ready to Start';
+      document.getElementById('focus-timer-status').className = 'text-xs font-bold uppercase tracking-wider text-brand-600 mt-2';
+    }
+
+    // Web Audio API Synthesizer (No external MP3 files required)
+    function playChimeSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3); // A5
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      } catch (e) {}
+    }
+
+    function playAmbientTone() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(216, audioCtx.currentTime); // 432Hz harmonic
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.0);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 2.0);
+        showToast('🎵 432Hz Alpha Focus Tone Played', 'info');
+      } catch (e) {}
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. Reschedule & Coach Actions
+    // -------------------------------------------------------------------------
+    function openRescheduleModal() {
+      document.getElementById('reschedule-modal').classList.remove('hidden');
+    }
+
+    function closeRescheduleModal() {
+      document.getElementById('reschedule-modal').classList.add('hidden');
+    }
+
+    function executeReschedule(slotText) {
+      closeRescheduleModal();
+      showToast(`Task rescheduled to ${slotText}. AI priorities rebalanced!`, 'info');
+      document.getElementById('coach-task-rationale').innerHTML = 
+        `<strong>Rebalanced slot:</strong> Moved to <em>${slotText}</em>. Re-optimizing intermediate gap before 2 PM class.`;
+    }
+
+    function completeCurrentCoachAction() {
+      increaseProductivityScore(10);
+      showToast('✅ Awesome job! Task marked complete. +10 Productivity Points!', 'success');
+      
+      // Morph the coach card into next task
+      document.getElementById('coach-task-headline').innerText = 
+        '“Next up: Review Operating Systems Semaphore Lab Code before tomorrow.”';
+      document.getElementById('coach-task-rationale').innerText = 
+        'With DBMS Question 2 completed, your highest remaining weight is the POSIX producer-consumer code due in 36h.';
+    }
+
+    function explainCoachAlgorithm() {
+      const panel = document.getElementById('coach-algo-explanation');
+      panel.classList.toggle('hidden');
+    }
+
+    function increaseProductivityScore(delta) {
+      const scoreElem = document.getElementById('productivity-score-text');
+      let current = parseInt(scoreElem.innerText) || 84;
+      let next = Math.min(100, current + delta);
+      scoreElem.innerText = next;
+
+      // Update svg circle dasharray
+      const circle = document.getElementById('productivity-circle');
+      if (circle) {
+        circle.setAttribute('stroke-dasharray', `${next}, 100`);
+      }
+    }
+
+    function markTaskDoneToast(taskName) {
+      showToast(`"${taskName}" marked done! Well done Alex!`, 'success');
+      increaseProductivityScore(5);
+    }
+
+    // -------------------------------------------------------------------------
+    // 4. Academic Assistant Tabs & Filter
+    // -------------------------------------------------------------------------
+    function switchAcademicTab(tab) {
+      const tabs = ['assignments', 'studyplan', 'schedule'];
+      tabs.forEach(t => {
+        const content = document.getElementById(`academic-tab-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (t === tab) {
+          content.classList.remove('hidden');
+          btn.className = 'px-3.5 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition font-bold';
+        } else {
+          content.classList.add('hidden');
+          btn.className = 'px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition font-semibold';
+        }
+      });
+    }
+
+    function filterAssignmentSubject(subject) {
+      const rows = document.querySelectorAll('.assignment-row');
+      rows.forEach(r => {
+        if (subject === 'all' || r.dataset.subject === subject) {
+          r.style.display = '';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+
+    function generateCustomStudyPlan() {
+      const subj = document.getElementById('gen-subject').value;
+      const days = document.getElementById('gen-days').value;
+      const hours = document.getElementById('gen-hours').value;
+
+      document.getElementById('plan-preview-title').innerText = 
+        `AI Spaced-Repetition Plan for ${subj} (${days}-Day Horizon @ ${hours}h/day)`;
+      
+      showToast(`✨ Generated optimal ${days}-day study roadmap for ${subj}!`, 'success');
+    }
+
+    function syncScheduleToast() {
+      showToast('📅 4 Study Blocks Synced to Google Calendar!', 'info');
+    }
+
+    // -------------------------------------------------------------------------
+    // 5. Notes & PDF Studio Logic
+    // -------------------------------------------------------------------------
+    function loadSamplePDF(type) {
+      const processing = document.getElementById('pdf-processing-state');
+      const progressBar = document.getElementById('processing-progress-bar');
+      const stepLabel = document.getElementById('processing-step-label');
+      const resultBox = document.getElementById('pdf-result-container');
+
+      processing.classList.remove('hidden');
+      resultBox.classList.add('hidden');
+
+      // Animate progress simulation
+      progressBar.style.width = '30%';
+      stepLabel.innerText = `Tokenizing ${type.toUpperCase()} PDF slides into Vector Chunks...`;
+
+      setTimeout(() => {
+        progressBar.style.width = '75%';
+        stepLabel.innerText = 'Extracting High-Probability Exam Theorems & Formulas...';
+      }, 400);
+
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+        stepLabel.innerText = 'Generating Flashcards & Diagnostic Mini-Quiz...';
+      }, 800);
+
+      setTimeout(() => {
+        processing.classList.add('hidden');
+        resultBox.classList.remove('hidden');
+        
+        if (type === 'dsa') {
+          populateDSAPDFData();
+        } else {
+          populateDBMSPDFData();
+        }
+
+        showToast('📄 PDF processed and synthesized successfully!', 'success');
+        switchDocTab('summary');
+      }, 1100);
+    }
+
+    function populateDBMSPDFData() {
+      document.getElementById('pdf-doc-title').innerText = 'DBMS_Unit4_Normalization_Comprehensive.pdf';
+      document.getElementById('pdf-doc-meta').innerText = '38 Pages • Extracted in 1.2s • RAG Confidence: 99.1%';
+      document.getElementById('doc-summary-p1').innerText = 
+        'Database normalization is the systematic process of organizing fields and tables within a relational database to minimize redundancy and eliminate anomalies. Focuses on functional dependencies (FDs), canonical covers, and progressive normal forms from 1NF to BCNF.';
+      document.getElementById('doc-summary-p2').innerHTML = 
+        'Exam key point: <strong>3NF preserves dependencies and is lossless</strong>, while <strong>BCNF guarantees complete absence of redundancy based on FDs</strong>, but may not preserve all FDs.';
+    }
+
+    function populateDSAPDFData() {
+      document.getElementById('pdf-doc-title').innerText = 'DSA_Dynamic_Programming_Advanced.pdf';
+      document.getElementById('pdf-doc-meta').innerText = '42 Pages • Extracted in 1.3s • RAG Confidence: 98.7%';
+      document.getElementById('doc-summary-p1').innerText = 
+        'Dynamic programming (DP) solves complex problems by breaking them into overlapping subproblems and optimal substructures. The notes contrast Top-Down Memoization (recursion + cache) with Bottom-Up Tabulation (iterative table fill).';
+      document.getElementById('doc-summary-p2').innerHTML = 
+        'High-probability exam problems: <strong>0/1 Knapsack</strong> vs <strong>Fractional Knapsack</strong> (greedy) and <strong>Longest Common Subsequence (LCS)</strong> with O(m x n) space optimizations.';
+    }
+
+    function switchDocTab(tab) {
+      const tabs = ['summary', 'keypoints', 'questions', 'flashcards', 'quiz'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`doc-tab-${t}`);
+        const content = document.getElementById(`doc-content-${t}`);
+        if (t === tab) {
+          content.classList.remove('hidden');
+          btn.className = 'px-3 py-1 rounded-lg bg-brand-600 text-white font-semibold';
+        } else {
+          content.classList.add('hidden');
+          btn.className = 'px-3 py-1 rounded-lg text-slate-300 hover:text-white font-normal';
+        }
+      });
+    }
+
+    let quizAnswersState = { 1: false, 2: false };
+
+    function checkQuizAnswer(qNum, optionLetter, isCorrect) {
+      const feedback = document.getElementById(`q${qNum}-feedback`);
+      feedback.classList.remove('hidden');
+      
+      if (isCorrect) {
+        feedback.className = 'text-xs font-semibold p-2.5 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300';
+        feedback.innerHTML = `✓ Correct! Option ${optionLetter} is the right conceptual answer.`;
+        quizAnswersState[qNum] = true;
+        playChimeSound();
+      } else {
+        feedback.className = 'text-xs font-semibold p-2.5 rounded-lg bg-rose-100 text-rose-800 border border-rose-300';
+        feedback.innerHTML = `✗ Incorrect. Review the flashcard on normal form requirements.`;
+        quizAnswersState[qNum] = false;
+      }
+
+      // Update quiz score badge
+      const totalCorrect = Object.values(quizAnswersState).filter(Boolean).length;
+      document.getElementById('quiz-score-badge').innerText = `Score: ${totalCorrect} / 2`;
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. Finance Interactions
+    // -------------------------------------------------------------------------
+    function addQuickExpense() {
+      const amtInput = document.getElementById('quick-expense-amount');
+      const amt = parseInt(amtInput.value) || 0;
+      if (amt <= 0) return;
+
+      showToast(`Logged ₹${amt} expense. Updated remaining balance!`, 'info');
+      amtInput.value = '';
+    }
+
+    function applySavingsAction(desc) {
+      showToast(`🎉 Accepted savings recommendation: ${desc}!`, 'success');
+      increaseProductivityScore(5);
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. Opportunity Hub Filter
+    // -------------------------------------------------------------------------
+    function filterOpportunities(cat) {
+      const cards = document.querySelectorAll('.opp-card');
+      const btns = document.querySelectorAll('.opp-btn');
+      
+      cards.forEach(c => {
+        if (cat === 'all' || c.dataset.category === cat) {
+          c.style.display = '';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+
+      btns.forEach(b => {
+        if (b.innerText.toLowerCase().includes(cat) || (cat === 'all' && b.innerText === 'All')) {
+          b.className = 'px-3 py-1.5 rounded-lg bg-slate-900 text-white opp-btn';
+        } else {
+          b.className = 'px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 opp-btn';
+        }
+      });
+    }
+
+    function tailorResumeToast(roleName) {
+      showToast(`📄 AI Resume generated for "${roleName}" emphasizing DBMS & SQL projects!`, 'info');
+    }
+
+    function applyOpportunityToast(orgName) {
+      showToast(`🚀 Application packet dispatched to ${orgName}!`, 'success');
+    }
+
+    function marketplaceContactToast(item, contact) {
+      showToast(`💬 Connected to ${contact} for "${item}". Notification sent!`, 'success');
+    }
+
+    // -------------------------------------------------------------------------
+    // 8. Context Engine Simulator (Scenarios)
+    // -------------------------------------------------------------------------
+    function simulateContextAction(scenario) {
+      const vecExam = document.getElementById('vec-exam');
+      const vecBudget = document.getElementById('vec-budget');
+      const vecTime = document.getElementById('vec-time');
+      const vecEnergy = document.getElementById('vec-energy');
+      const title = document.getElementById('context-rec-title');
+      const ac = document.getElementById('context-detail-academic');
+      const fi = document.getElementById('context-detail-finance');
+      const ca = document.getElementById('context-detail-career');
+
+      // Update button highlights
+      document.querySelectorAll('.scenario-btn').forEach(b => {
+        b.className = 'px-4 py-2.5 rounded-xl font-semibold text-xs transition bg-slate-100 text-slate-700 hover:bg-slate-200 scenario-btn';
+      });
+      const activeBtn = document.getElementById(`scenario-btn-${scenario}`);
+      if (activeBtn) activeBtn.className = 'px-4 py-2.5 rounded-xl font-semibold text-xs transition bg-slate-900 text-white shadow-md scenario-btn';
+
+      if (scenario === 'exam_rush') {
+        vecExam.innerText = '72 Hours (DBMS)';
+        vecExam.className = 'font-bold text-rose-400';
+        vecBudget.innerText = '₹380 (Low)';
+        vecTime.innerText = '2.0 Hours';
+        vecEnergy.innerText = '65% (Medium)';
+
+        title.innerText = '“Revise DBMS normalization for 45 minutes, skip paid food delivery today, and apply for the hackathon tomorrow.”';
+        ac.innerText = '45m focus sprint on BCNF & 3NF flashcards. Yields highest point return before bedtime.';
+        fi.innerText = 'Skip paid food delivery tonight; use mess coupon to protect your ₹380 reserve for weekend printouts.';
+        ca.innerText = 'Apply for the hackathon tomorrow afternoon during your 3:30 PM gap; zero impact on review score.';
+      } 
+      else if (scenario === 'weekend_chill') {
+        vecExam.innerText = '6 Days (ML Midterm)';
+        vecExam.className = 'font-bold text-emerald-400';
+        vecBudget.innerText = '₹1,250 (Healthy)';
+        vecTime.innerText = '4.5 Hours Free';
+        vecEnergy.innerText = '90% (High)';
+
+        title.innerText = '“Draft Smart India Hackathon system architecture tonight, invite 2 teammates, and treat yourself to a canteen smoothie.”';
+        ac.innerText = 'Relax academic load: Light 30-minute review of Kaggle Random Forest hyperparameters.';
+        fi.innerText = 'Budget is healthy: Safe to spend ₹120 on campus snacks with study group.';
+        ca.innerText = 'Submit Hackathon abstract draft while team momentum is high (Closes in 4 days).';
+      }
+      else if (scenario === 'placement_prep') {
+        vecExam.innerText = 'None This Week';
+        vecExam.className = 'font-bold text-slate-300';
+        vecBudget.innerText = '₹600 (Normal)';
+        vecTime.innerText = '1.0 Hour Left';
+        vecEnergy.innerText = '30% (Exhausted)';
+
+        title.innerText = '“Wind down with 15 minutes of light DSA flashcards, skip caffeine, and sleep by 11:00 PM for morning lab alertness.”';
+        ac.innerText = 'Zero heavy problem-solving. Review 3 flip cards on graph traversal complexity.';
+        fi.innerText = 'No expenses needed tonight. Fill water bottle and avoid late night vending machine.';
+        ca.innerText = 'Archive Razorpay internship listing to queue for Saturday morning review.';
+      }
+
+      showToast(`Recomputed prescriptive recommendation for Scenario: ${scenario.toUpperCase()}!`, 'info');
+    }
+
+    // -------------------------------------------------------------------------
+    // 9. Feature Specification Modals
+    // -------------------------------------------------------------------------
+    const featureData = {
+      coach: {
+        title: 'AI Productivity Coach',
+        tag: 'Prescriptive Decision Engine',
+        icon: 'fa-brain',
+        does: 'Continuously monitors Google Calendar, LMS due dates, and student feedback to synthesize all obligations into one high-priority 25-to-45 minute focus action.',
+        input: 'Calendar slots, current time of day, assignment weightage (%), hours until submission, and cognitive fatigue level.',
+        output: 'Prescriptive task card with estimated duration, rationalized explanation, and direct "Start Focus Session" timer launcher.',
+        benefit: 'Eliminates procrastination and choice paralysis. The student opens the app and immediately knows their single best action.'
+      },
+      academic: {
+        title: 'Smart Academic Assistant',
+        tag: 'Adaptive Spaced-Repetition System',
+        icon: 'fa-book-open',
+        does: 'Dynamically balances study commitments across major CS courses (DBMS, DSA, OS, ML). Automatically redistributes hours when an exam enters the 72-hour window.',
+        input: 'Course syllabus topics, target exam dates, desired study hours per day, and subject difficulty rating.',
+        output: 'Spaced repetition schedule, progress tracking across assignments, and calendar sync hooks.',
+        benefit: 'Prevents night-before cramming while ensuring balanced academic progress across all enrolled semester courses.'
+      },
+      pdf: {
+        title: 'Notes & PDF Summarization Studio',
+        tag: 'Retrieval-Augmented Generation (RAG)',
+        icon: 'fa-file-pdf',
+        does: 'Parses lengthy lecture slide decks and faculty handouts into concise executive summaries, high-yield bullet formulas, and auto-generated flashcards.',
+        input: 'PDF, PPTX, or Markdown lecture files uploaded by student or scraped from University LMS.',
+        output: 'Structured summary, key exam questions with answer hints, 3D interactive flashcards, and diagnostic mini-quizzes.',
+        benefit: 'Cuts revision time by 70%. Turns passive slide reading into active recall and tested comprehension.'
+      },
+      finance: {
+        title: 'Student Finance Assistant',
+        tag: 'Deficit Prediction & Alternative Radar',
+        icon: 'fa-wallet',
+        does: 'Monitors weekly student budget allowances, classifies expenses into campus categories, and warns about weekend deficit burnout before it occurs.',
+        input: 'Weekly allowance, category thresholds, and daily quick-logged expenses.',
+        output: 'Multi-category visual spend breakdown, safe daily spending limit, and context-aware money-saving substitutions.',
+        benefit: 'Reduces financial anxiety on campus. Ensures students never run out of funds before Sunday night.'
+      },
+      opp: {
+        title: 'Curated Opportunity Hub',
+        tag: 'Hybrid Matching Engine',
+        icon: 'fa-compass',
+        does: 'Filters through hundreds of external job boards and contests to recommend only verified internships, hackathons, and scholarships that strictly align with student skills.',
+        input: 'Student enrolled courses, verified programming languages, GPA threshold, and GitHub repository tags.',
+        output: 'Ranked opportunity cards featuring skill match score, missing prerequisites, deadline reminders, and 1-click tailored resume generators.',
+        benefit: 'Students avoid wasting hours on irrelevant LinkedIn spam and never miss prestigious deadlines like GSoC or SIH.'
+      },
+      marketplace: {
+        title: 'Personalized Student Marketplace (Recommendation Layer)',
+        tag: 'Resource Recommendation Engine',
+        icon: 'fa-bag-shopping',
+        does: 'Aggregates second-hand textbooks, lab toolkits, hostel appliances, and campus mess discounts matching the student’s exact current courses and budget.',
+        input: 'Current semester syllabus requirements, hostel residential block, and remaining weekly discretionary allowance.',
+        output: 'Contextual recommendations for peer hand-me-downs with direct senior contact info and campus co-op vouchers.',
+        benefit: 'Saves students thousands of rupees on lab kits and textbooks while building a circular campus resource economy.'
+      }
+    };
+
+    function openFeatureModal(key) {
+      const data = featureData[key];
+      if (!data) return;
+
+      document.getElementById('feature-modal-title').innerText = data.title;
+      document.getElementById('feature-modal-tag').innerText = data.tag;
+      document.getElementById('feature-modal-icon').className = `fa-solid ${data.icon}`;
+      document.getElementById('feature-modal-does').innerText = data.does;
+      document.getElementById('feature-modal-input').innerText = data.input;
+      document.getElementById('feature-modal-output').innerText = data.output;
+      document.getElementById('feature-modal-benefit').innerText = data.benefit;
+
+      document.getElementById('feature-detail-modal').classList.remove('hidden');
+    }
+
+    function closeFeatureModal() {
+      document.getElementById('feature-detail-modal').classList.add('hidden');
+    }
+
+    function refreshDashboardState() {
+      showToast('🔄 Synchronized with campus LMS & refreshed context vector!', 'info');
+    }
+  </script>
+
+</body>
+</html>
